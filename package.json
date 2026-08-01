@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "typecheck:shared": "pnpm exec tsc -p packages/shared/tsconfig.json --noEmit",
     "typecheck:web": "pnpm exec tsc -p apps/web/tsconfig.json --noEmit",
-    "typecheck:api": "pnpm exec tsc -p apps/api/tsconfig.json --noEmit"
+    "typecheck:api": "pnpm exec tsc -p apps/api/tsconfig.json --noEmit",
+    "typecheck:color-engine": "pnpm exec tsc -p packages/color-engine/tsconfig.json --noEmit"
   },
   "keywords": [],
   "author": "",
