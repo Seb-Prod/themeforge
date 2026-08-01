@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Build
+dist/
+
+# Environment
+.env
+.env.*
+
+# Prisma
+prisma/*.db
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# AI assistants
+.agents/
+.claude/
+.windsurf/
+
+# Cache
+.turbo/

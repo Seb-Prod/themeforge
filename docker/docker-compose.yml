@@ -1,0 +1,23 @@
+services:
+  mysql:
+    image: mysql:8.4
+
+    container_name: themeforge-mysql
+
+    restart: unless-stopped
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: themeforge
+      MYSQL_USER: themeforge
+      MYSQL_PASSWORD: themeforge
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - themeforge_mysql_data:/var/lib/mysql
+
+
+volumes:
+  themeforge_mysql_data:
