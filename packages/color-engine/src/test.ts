@@ -1,17 +1,6 @@
-import {
-  convertToOklch,
-  convertToHex
-} from "./color";
-
-
-const color = "#a865cc";
-
-
-const oklch = convertToOklch(color);
-
-console.log(oklch);
+import { generateScale } from "./palette";
 
 
 console.log(
-  convertToHex(oklch)
+  generateScale("#a865cc")
 );
