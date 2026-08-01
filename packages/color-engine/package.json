@@ -1,0 +1,10 @@
+{
+  "name": "@themeforge/color-engine",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@themeforge/shared": "workspace:*",
+    "culori": "^4.0.0"
+  }
+}
