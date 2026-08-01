@@ -1,23 +1,21 @@
-import type { HexColor } from "./color";
-
+import { ColorScale, ColorRole, HexColor } from "../color";
 
 /**
- * Une nuance générée automatiquement.
+ * Une nuance d'une couleur.
  *
  * Exemple :
- * primary-50
- * primary-100
  * primary-500
- * primary-900
  */
 export interface ColorShade {
-  name: string;
   value: HexColor;
-  contrastRatio?: number;
+
+  /**
+   * Niveau Tailwind-like.
+   */
+  level: number;
 }
 
-
 /**
- * Une échelle complète de nuances.
+ * Palette complète du thème.
  */
-export type ColorScale = Record<string, ColorShade>;
+export type ThemePalette = Partial<Record<ColorRole, ColorScale>>;

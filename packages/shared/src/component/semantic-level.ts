@@ -1,4 +1,4 @@
-import { HexColor } from "./color";
+import { HexColor } from "../color";
 
 /**
  * Intensité d'une couleur.

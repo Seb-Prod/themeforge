@@ -1,4 +1,3 @@
-export * from "./theme/color";
-export * from "./theme/palette";
-export * from "./theme/tokens";
-export * from "./theme/theme";
+export * from "./color";
+export * from "./component";
+export * from "./theme";

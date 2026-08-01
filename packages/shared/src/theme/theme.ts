@@ -1,9 +1,27 @@
-import type { BaseColors } from "./color";
-import type { SemanticColors } from "./tokens";
+import type { BaseColors } from "../color/base-colors";
+import type { ThemePalette } from "./palette";
 
+
+/**
+ * Définition complète d'un thème ThemeForge.
+ */
 export interface ThemeDefinition {
-  id?: string;
+
+  /**
+   * Nom du thème.
+   */
   name: string;
-  colors: BaseColors;
-  tokens?: SemanticColors;
+
+
+  /**
+   * Couleurs choisies par l'utilisateur.
+   */
+  base: BaseColors;
+
+
+  /**
+   * Palette générée.
+   */
+  palette?: ThemePalette;
+
 }
