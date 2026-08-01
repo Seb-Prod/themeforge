@@ -1,5 +1,5 @@
-import { ThemeDefinition } from "@themeforge/shared";
 
+import type { ThemeDefinition, RadiusTokens } from "@themeforge/shared";
 
 const theme: ThemeDefinition = {
   name: "Test",
