@@ -1,18 +1,15 @@
+import { ThemeDefinition } from "@themeforge/shared";
 
 
 const theme: ThemeDefinition = {
   name: "Test",
   colors: {
-    background: "#ffffff",
-    primary: "#a865cc",
-    secondary: "#f5b942",
+    background: "#fffff",
+    primary: "#a854cc",
+    secondary: "#f5b842",
   },
 };
 
 export default function Home() {
-  return (
-    <main>
-      {theme.name}
-    </main>
-  );
+  return <main>{theme.name}</main>;
 }
