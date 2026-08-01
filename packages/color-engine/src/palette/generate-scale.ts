@@ -1,3 +1,4 @@
+import { ColorScale, HexColor } from "@themeforge/shared";
 import {
   convertToHex,
   convertToOklch,
@@ -9,17 +10,11 @@ import {
 } from "./scale";
 
 
-type ColorScale = Record<
-  ScaleStep,
-  string
->;
-
-
 /**
  * Génère une échelle OKLCH depuis une couleur.
  */
 export function generateScale(
-  color: string
+  color: HexColor
 ): ColorScale {
 
   const base = convertToOklch(color);
@@ -29,15 +24,20 @@ export function generateScale(
 
   for (const step of SCALE_STEPS) {
 
-    const lightness = calculateLightness(step);
-
-    scale[step] = convertToHex({
-      mode: "oklch",
-      l: lightness,
-      c: base.c,
-      h: base.h,
-    });
+  if (step === 500) {
+    scale[step] = color;
+    continue;
   }
+
+  const lightness = calculateLightness(step);
+
+  scale[step] = convertToHex({
+    mode: "oklch",
+    l: lightness,
+    c: base.c,
+    h: base.h,
+  });
+}
 
 
   return scale;

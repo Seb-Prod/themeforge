@@ -63,6 +63,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@themeforge/color-engine':
+        specifier: workspace:*
+        version: link:../../packages/color-engine
       '@themeforge/shared':
         specifier: workspace:*
         version: link:../../packages/shared

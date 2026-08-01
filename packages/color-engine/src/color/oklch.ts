@@ -6,6 +6,7 @@ import {
 } from "culori";
 
 import type { OklchColor } from "./types";
+import { HexColor } from "@themeforge/shared";
 
 
 const toOklch = converter("oklch");
@@ -43,19 +44,34 @@ export function convertToOklch(
   };
 }
 
+function ensureHexColor(
+  value: string
+): HexColor {
+
+  if (!value.startsWith("#")) {
+    throw new Error(
+      `Invalid hex color: ${value}`
+    );
+  }
+
+  return value as HexColor;
+}
+
 
 /**
  * Convertit une couleur OKLCH en HEX.
  */
 export function convertToHex(
   color: OklchColor
-): string {
+): HexColor {
 
-  return formatHex({
+  const hex = formatHex({
     mode: "oklch",
     l: color.l,
     c: color.c,
     h: color.h,
     alpha: color.alpha,
   } as Oklch);
+
+  return ensureHexColor(hex);
 }
