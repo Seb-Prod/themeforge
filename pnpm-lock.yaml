@@ -26,6 +26,9 @@ importers:
       '@prisma/client':
         specifier: ^7.9.1
         version: 7.9.1(prisma@7.9.1(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@7.0.2))(typescript@7.0.2)
+      '@themeforge/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
       cors:
         specifier: ^2.8.6
         version: 2.8.6
@@ -60,6 +63,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@themeforge/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
       next:
         specifier: 16.2.12
         version: 16.2.12(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
