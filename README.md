@@ -96,7 +96,7 @@ ThemeForge est structuré en monorepo :
 
 ## Statut
 
-🚧 En développement précoce
+🚧 En développement
 
 ## Licence
 
