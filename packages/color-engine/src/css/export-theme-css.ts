@@ -5,14 +5,36 @@ import { generateComponentCss } from "./generate-component-css";
 import { formatRules } from "./format-css";
 
 import { generateCssVariables } from "./generate-css";
+import { ThemeExportOptions } from "./types";
 
 /**
  * Génère le fichier CSS complet du thème.
  */
-export function exportThemeCss(theme: ThemeDefinition): string {
-  const variables = generateCssVariables(theme);
+export function exportThemeCss(
+  theme: ThemeDefinition,
+  options: ThemeExportOptions = {}
+): string {
 
-  const rules = formatRules(generateComponentCss(theme));
+  const mode = options.mode ?? "light";
 
-  return [variables, "", rules].join("\n");
+
+  const variables = generateCssVariables(
+    theme,
+    mode,
+  );
+
+
+  const rules = formatRules(
+    generateComponentCss(
+      theme,
+      mode,
+    ),
+  );
+
+
+  return [
+    variables,
+    "",
+    rules,
+  ].join("\n");
 }

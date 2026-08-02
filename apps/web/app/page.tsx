@@ -41,7 +41,9 @@ export default function Home() {
   });
 
  console.log(
-  exportThemeCss(theme)
+  exportThemeCss(theme,{
+    mode:"dark"
+  })
 );
 
   return (

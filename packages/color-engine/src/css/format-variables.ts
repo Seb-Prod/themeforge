@@ -3,15 +3,11 @@
  */
 export function formatVariables(
   variables: string[],
+  selector = ":root",
 ): string {
 
   return [
-    "/**",
-    " * ThemeForge generated theme",
-    " * Do not edit manually",
-    " */",
-    "",
-    ":root {",
+    `${selector} {`,
     ...variables.map(
       (variable) => `  ${variable}`,
     ),

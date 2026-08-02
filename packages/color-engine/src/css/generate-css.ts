@@ -1,14 +1,18 @@
 import { SemanticColorTokens } from "../semantic";
-import type { ThemeDefinition } from "../theme";
+import { getThemeScheme, type ThemeDefinition, type ThemeMode } from "../theme";
 import { formatVariables } from "./format-variables";
 
 /**
  * Génère les variables CSS de palette.
  */
-export function generateCssVariables(theme: ThemeDefinition): string {
+export function generateCssVariables(
+  theme: ThemeDefinition,
+  mode: ThemeMode = "light",
+): string {
+  const scheme = getThemeScheme(theme, mode);
   const variables: string[] = [];
 
-  Object.entries(theme).forEach(([name, color]) => {
+  Object.entries(scheme).forEach(([name, color]) => {
     // Palette
     Object.entries(color.scale).forEach(([step, hex]) => {
       variables.push(`--palette-${name}-${step}: ${hex};`);
@@ -18,7 +22,7 @@ export function generateCssVariables(theme: ThemeDefinition): string {
     variables.push(...generateSemanticVariables(name, color.semantic));
   });
 
-  return formatVariables(variables);
+  return formatVariables(variables, mode === "dark" ? ".dark" : ":root");
 }
 
 /**

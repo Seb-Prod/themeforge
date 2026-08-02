@@ -1,4 +1,4 @@
-import type { ThemeDefinition } from "../theme";
+import { getThemeScheme, type ThemeDefinition, type ThemeMode } from "../theme";
 import type { SemanticColorTokens } from "../semantic";
 import { CssRule } from "../css";
 
@@ -10,10 +10,14 @@ function entries<T extends object>(value: T): [keyof T, T[keyof T]][] {
  * Génère les mappings CSS dynamiques
  * utilisés par les composants.
  */
-export function generateComponentCss(theme: ThemeDefinition): CssRule[] {
+export function generateComponentCss(
+  theme: ThemeDefinition,
+  mode: ThemeMode = "light",
+): CssRule[] {
+  const scheme = getThemeScheme(theme, mode);
   const rules: CssRule[] = [];
 
-  entries(theme).forEach(([color, value]) => {
+  entries(scheme).forEach(([color, value]) => {
     entries(value.semantic).forEach(([variant, states]) => {
       entries(states).forEach(([state]) => {
         rules.push({

@@ -9,7 +9,7 @@ import type { ComponentTokens } from "./types";
 export function generateComponentTokens(
   theme: ThemeDefinition,
 ): ComponentTokens[] {
-  return Object.entries(theme).map(([color, value]) => ({
+  return Object.entries(theme.light).map(([color, value]) => ({
     color,
     variants: value.semantic,
   }));

@@ -22,7 +22,14 @@ function createThemeColor(color: HexColor) {
  */
 export function createTheme(input: ThemeInput): ThemeDefinition {
   return {
-    primary: createThemeColor(input.primary),
-    accent: createThemeColor(input.accent),
+    light: {
+      primary: createThemeColor(input.primary),
+      accent: createThemeColor(input.accent),
+    },
+
+    dark: {
+      primary: createThemeColor(input.primary),
+      accent: createThemeColor(input.accent),
+    },
   };
 }
