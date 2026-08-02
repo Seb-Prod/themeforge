@@ -1,4 +1,4 @@
-import { getThemeScheme, type ThemeDefinition, type ThemeMode } from "../theme";
+import { ThemeScheme, type ThemeMode } from "../theme";
 import { CssRule } from "../css";
 import { entries } from "../utils";
 
@@ -7,10 +7,8 @@ import { entries } from "../utils";
  * utilisés par les composants.
  */
 export function generateComponentCss(
-  theme: ThemeDefinition,
-  mode: ThemeMode = "light",
+  scheme: ThemeScheme,
 ): CssRule[] {
-  const scheme = getThemeScheme(theme, mode);
   const rules: CssRule[] = [];
 
   entries(scheme).forEach(([color, value]) => {

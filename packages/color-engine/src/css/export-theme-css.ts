@@ -1,4 +1,4 @@
-import type { ThemeDefinition } from "../theme";
+import { getThemeScheme, type ThemeDefinition } from "../theme";
 
 import { generateComponentCss } from "./generate-component-css";
 
@@ -17,6 +17,10 @@ export function exportThemeCss(
 
   const mode = options.mode ?? "light";
 
+  const scheme = getThemeScheme(
+    theme,
+    mode,
+  );
 
   const variables = generateCssVariables(
     theme,
@@ -26,8 +30,7 @@ export function exportThemeCss(
 
   const rules = formatRules(
     generateComponentCss(
-      theme,
-      mode,
+      scheme,
     ),
   );
 
