@@ -1,5 +1,6 @@
 import {
   createTheme,
+  exportThemeCss,
   generateComponentCss,
   generateComponentTokens,
   generateCssVariables,
@@ -39,15 +40,9 @@ export default function Home() {
     accent: "#f5b942",
   });
 
-  const css = generateCssVariables(theme);
-  const components = generateComponentTokens(theme);
-  const rules = generateComponentCss(theme);
-
-  // console.log(theme);
-  // console.log(generateCssVariables(theme));
-  console.log(components);
-
-  console.log(rules);
+ console.log(
+  exportThemeCss(theme)
+);
 
   return (
     <div>
