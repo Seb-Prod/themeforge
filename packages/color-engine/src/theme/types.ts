@@ -1,4 +1,4 @@
-import type { ColorScale } from "@themeforge/shared";
+import type { ColorScale, HexColor } from "@themeforge/shared";
 import type { SemanticColorTokens } from "../semantic";
 
 export interface ThemeColor {
@@ -13,10 +13,9 @@ export interface ThemeColor {
   semantic: SemanticColorTokens;
 }
 
-export interface ThemeScheme {
-  primary: ThemeColor;
-  accent: ThemeColor;
-}
+export type ThemeScheme = Record<string, ThemeColor>;
+
+export type ThemeInput = Record<string, HexColor>;
 
 export interface ThemeDefinition {
   light: ThemeScheme;

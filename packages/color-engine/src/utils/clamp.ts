@@ -1,3 +1,6 @@
+/**
+ * Limite une valeur entre un minimum et un maximum.
+ */
 export function clamp(
   value: number,
   min: number,

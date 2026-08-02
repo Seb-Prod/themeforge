@@ -33,12 +33,14 @@ export default function Home() {
   const solidDefault = tokens.solid.default;
 
   const theme = createTheme({
-    primary: "#a865cc",
+    brand: "#a865cc",
     accent: "#f5b942",
+    success: "#4caf50",
+    danger: "#ef4444",
   });
 
- console.log(theme.light);
-console.log(theme.dark);
+  console.log(theme.light);
+  console.log(theme.dark);
 
   return (
     <div>

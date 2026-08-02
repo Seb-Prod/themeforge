@@ -1,7 +1,10 @@
+/**
+ * Version typée de Object.entries().
+ */
 export function entries<T extends object>(
-  object: T,
+  value: T,
 ): [keyof T, T[keyof T]][] {
-  return Object.entries(object) as [
+  return Object.entries(value) as [
     keyof T,
     T[keyof T],
   ][];

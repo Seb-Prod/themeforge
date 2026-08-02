@@ -1,10 +1,6 @@
 import { getThemeScheme, type ThemeDefinition, type ThemeMode } from "../theme";
-import type { SemanticColorTokens } from "../semantic";
 import { CssRule } from "../css";
-
-function entries<T extends object>(value: T): [keyof T, T[keyof T]][] {
-  return Object.entries(value) as [keyof T, T[keyof T]][];
-}
+import { entries } from "../utils";
 
 /**
  * Génère les mappings CSS dynamiques

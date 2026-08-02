@@ -1,18 +1,10 @@
 import type { HexColor } from "@themeforge/shared";
 import { generateSemanticTokens } from "../semantic";
-import type { ThemeDefinition, ThemeMode } from "./types";
+import type { ThemeColor, ThemeDefinition, ThemeInput, ThemeMode } from "./types";
 import { generateScale } from "../palette";
 
-interface ThemeInput {
-  primary: HexColor;
-  accent: HexColor;
-}
-
-function createThemeColor(color: HexColor, mode: ThemeMode) {
-  const scale = generateScale(
-    color,
-    mode,
-  );
+function createThemeColor(color: HexColor, mode: ThemeMode): ThemeColor {
+  const scale = generateScale(color, mode);
 
   return {
     scale,
@@ -24,15 +16,14 @@ function createThemeColor(color: HexColor, mode: ThemeMode) {
  * Génère un thème complet.
  */
 export function createTheme(input: ThemeInput): ThemeDefinition {
-  const light = {
-    primary: createThemeColor(input.primary, "light"),
-    accent: createThemeColor(input.accent, "light"),
-  };
+  const light = {} as ThemeDefinition["light"];
+  const dark = {} as ThemeDefinition["dark"];
 
-  const dark = {
-    primary: createThemeColor(input.primary, "dark"),
-    accent: createThemeColor(input.accent, "dark"),
-  };
+  Object.entries(input).forEach(([name, color]) => {
+    light[name] = createThemeColor(color, "light");
+
+    dark[name] = createThemeColor(color, "dark");
+  });
 
   return {
     light,
