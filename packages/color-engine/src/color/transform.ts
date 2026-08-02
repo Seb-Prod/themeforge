@@ -1,28 +1,23 @@
 import type { OklchColor } from "./types";
-import type { ScaleStep } from "../palette/constants";
+
+export interface OklchTransformOptions {
+  lightness: number;
+  chromaFactor?: number;
+}
 
 export function adjustOklch(
   color: OklchColor,
-  step: ScaleStep,
-  lightness: number,
+  options: OklchTransformOptions,
 ): OklchColor {
   return {
     mode: "oklch",
 
-    l: lightness,
+    l: options.lightness,
 
-    c: adjustChroma(color.c, step),
+    c: options.chromaFactor ? color.c * options.chromaFactor : color.c,
 
     h: color.h,
 
     alpha: color.alpha,
   };
-}
-
-function adjustChroma(chroma: number, step: ScaleStep): number {
-  if (step <= 100 || step >= 900) {
-    return chroma * 0.75;
-  }
-
-  return chroma;
 }

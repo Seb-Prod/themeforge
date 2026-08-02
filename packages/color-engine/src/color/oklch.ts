@@ -1,9 +1,9 @@
 import { converter, formatHex, parse, type Oklch } from "culori";
 import type { OklchColor } from "./types";
 import { HexColor } from "@themeforge/shared";
+import { fitToGamut } from "./fit-gamut";
 
-const toOklch = converter("oklch");
-
+const toOklch = converter<Oklch>("oklch");
 /**
  * Convertit une couleur en OKLCH normalisé.
  */
@@ -40,13 +40,18 @@ function ensureHexColor(value: string): HexColor {
 /**
  * Convertit une couleur OKLCH en HEX.
  */
-export function convertToHex(color: OklchColor): HexColor {
+export function convertToHex(
+  color: OklchColor,
+): HexColor {
+
+  const fitted = fitToGamut(color);
+
   const hex = formatHex({
     mode: "oklch",
-    l: color.l,
-    c: color.c,
-    h: color.h,
-    alpha: color.alpha,
+    l: fitted.l,
+    c: fitted.c,
+    h: fitted.h,
+    alpha: fitted.alpha,
   } as Oklch);
 
   return ensureHexColor(hex);

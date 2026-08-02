@@ -20,7 +20,7 @@ import styles from "./page.module.css";
  */
 export default function Home() {
   /** Couleur de base utilisée pour générer l'échelle */
-  const baseColor = "#4caf50";
+  const baseColor = "#a865cc";
 
   /** Échelle générée (objet { "50": "#...", "100": "#...", ... }) */
   const scale = generateScale(baseColor, "light");
@@ -34,9 +34,6 @@ export default function Home() {
 
   const theme = createTheme({
     brand: "#a865cc",
-    accent: "#f5b942",
-    success: "#4caf50",
-    danger: "#ef4444",
   });
 
   console.log(theme.light);

@@ -1,14 +1,10 @@
-import { ColorScale, ColorScaleStep, HexColor } from "@themeforge/shared";
-import { adjustOklch, convertToHex, convertToOklch } from "../color";
-
+import type { ColorScale, HexColor } from "@themeforge/shared";
+import { adjustOklch, convertToHex, convertToOklch, isInGamut } from "../color";
 import { SCALE_STEPS } from "./scale";
-import {
-  DARK_SCALE_LIGHTNESS,
-  LIGHT_SCALE_LIGHTNESS,
-  LightnessMap,
-} from "./constants";
-import { ThemeMode } from "../theme";
-import { ScaleOptions } from "./types";
+import type { ScaleStep } from "./scale";
+import { DARK_SCALE_LIGHTNESS, LIGHT_SCALE_LIGHTNESS } from "./constants";
+import type { ThemeMode } from "../theme";
+import type { ScaleOptions } from "./types";
 
 /**
  * Génère une échelle OKLCH depuis une couleur.
@@ -24,6 +20,14 @@ function getScaleOptions(mode: ThemeMode): ScaleOptions {
   return {
     lightness: mode === "dark" ? DARK_SCALE_LIGHTNESS : LIGHT_SCALE_LIGHTNESS,
   };
+}
+
+function getChromaFactor(step: ScaleStep): number {
+  if (step <= 100 || step >= 900) {
+    return 0.75;
+  }
+
+  return 1;
 }
 
 function generateScaleFromOptions(
@@ -42,7 +46,16 @@ function generateScaleFromOptions(
       continue;
     }
 
-    scale[step] = convertToHex(adjustOklch(base, step, lightness));
+    const adjusted = adjustOklch(base, {
+      lightness,
+      chromaFactor: getChromaFactor(step),
+    });
+
+    if (!isInGamut(adjusted)) {
+      console.warn("Out of gamut", step, adjusted);
+    }
+
+    scale[step] = convertToHex(adjusted);
   }
 
   return scale;
