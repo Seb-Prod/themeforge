@@ -1,4 +1,4 @@
-import { createTheme, generateScale, generateSemantic } from "@themeforge/color-engine";
+import { createTheme, generateCssVariables, generateScale, generateSemantic } from "@themeforge/color-engine";
 import styles from "./page.module.css";
 
 /**
@@ -33,6 +33,9 @@ export default function Home() {
   });
 
   console.log(theme);
+  console.log(
+  generateCssVariables(theme)
+);
 
   return (
     <div>
