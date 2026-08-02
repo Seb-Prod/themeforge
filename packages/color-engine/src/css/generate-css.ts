@@ -1,6 +1,6 @@
 import { SemanticColorTokens } from "../semantic";
 import type { ThemeDefinition } from "../theme";
-import { formatCss } from "./format-css";
+import { formatVariables } from "./format-variables";
 
 /**
  * Génère les variables CSS de palette.
@@ -18,7 +18,7 @@ export function generateCssVariables(theme: ThemeDefinition): string {
     variables.push(...generateSemanticVariables(name, color.semantic));
   });
 
-  return formatCss(variables);
+  return formatVariables(variables);
 }
 
 /**

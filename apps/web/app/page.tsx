@@ -41,13 +41,13 @@ export default function Home() {
 
   const css = generateCssVariables(theme);
   const components = generateComponentTokens(theme);
-  const css2 = generateComponentCss(theme);
+  const rules = generateComponentCss(theme);
 
   // console.log(theme);
   // console.log(generateCssVariables(theme));
   console.log(components);
 
-  console.log(css2.join("\n"));
+  console.log(rules);
 
   return (
     <div>
