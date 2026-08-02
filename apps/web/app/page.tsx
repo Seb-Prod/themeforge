@@ -1,11 +1,7 @@
 import {
   createTheme,
-  exportThemeCss,
-  generateComponentCss,
-  generateComponentTokens,
-  generateCssVariables,
   generateScale,
-  generateSemantic,
+  generateSemanticTokens,
 } from "@themeforge/color-engine";
 import styles from "./page.module.css";
 
@@ -27,10 +23,11 @@ export default function Home() {
   const baseColor = "#af65ba";
 
   /** Échelle générée (objet { "50": "#...", "100": "#...", ... }) */
-  const scale = generateScale(baseColor);
+  const scale = generateScale(baseColor, "light");
+  const scaleDark = generateScale(baseColor, "dark");
 
   /** Tokens sémantiques dérivés de l'échelle */
-  const tokens = generateSemantic(scale);
+  const tokens = generateSemanticTokens(scale);
 
   /** Token "solid" par défaut (background / text / border) */
   const solidDefault = tokens.solid.default;
@@ -40,11 +37,8 @@ export default function Home() {
     accent: "#f5b942",
   });
 
- console.log(
-  exportThemeCss(theme,{
-    mode:"dark"
-  })
-);
+ console.log(theme.light);
+console.log(theme.dark);
 
   return (
     <div>
@@ -55,6 +49,28 @@ export default function Home() {
           /** Contraste texte clair/sombre selon la luminosité de la nuance */
           const textClass =
             Number(step) >= 400 ? styles["text-light"] : styles["text-dark"];
+
+          return (
+            <div
+              key={step}
+              className={[styles["scale-square"], textClass].join(" ")}
+              style={{ backgroundColor: color }}
+            >
+              {/* ── Labels ── */}
+              <span className={styles["scale-step"]}>{step}</span>
+              <span className={styles["scale-hex"]}>{color}</span>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className={styles["scale-grid"]}>
+        {/* ── Carrés de couleur ── */}
+        {Object.entries(scaleDark).map(([step, hex]) => {
+          const color = hex as string;
+          /** Contraste texte clair/sombre selon la luminosité de la nuance */
+          const textClass =
+            Number(step) >= 500 ? styles["text-dark"] : styles["text-light"];
 
           return (
             <div

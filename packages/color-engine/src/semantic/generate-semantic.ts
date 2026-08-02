@@ -27,7 +27,7 @@ function createToken(
  * Génère les tokens sémantiques
  * depuis une palette.
  */
-export function generateSemantic(
+export function generateSemanticTokens(
   scale: ColorScale
 ): SemanticColorTokens {
 

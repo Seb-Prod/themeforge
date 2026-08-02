@@ -1,23 +1,44 @@
 import { ColorScale, ColorScaleStep, HexColor } from "@themeforge/shared";
 import { convertToHex, convertToOklch } from "../color";
 
-import { LIGHTNESS_MAP, SCALE_STEPS, type ScaleStep } from "./scale";
+import { SCALE_STEPS } from "./scale";
+import { DARK_SCALE_LIGHTNESS, LIGHT_SCALE_LIGHTNESS, LightnessMap } from "./constants";
+import { ThemeMode } from "../theme";
 
 /**
  * Génère une échelle OKLCH depuis une couleur.
  */
-export function generateScale(color: HexColor): ColorScale {
+export function generateScale(
+  color: HexColor,
+  mode: ThemeMode = "light",
+): ColorScale {
+
+  const lightnessMap =
+    mode === "dark"
+      ? DARK_SCALE_LIGHTNESS
+      : LIGHT_SCALE_LIGHTNESS;
+
+  return generateScaleFromLightness(
+    color,
+    lightnessMap,
+  );
+}
+
+function generateScaleFromLightness(
+  color: HexColor,
+  lightnessMap: LightnessMap,
+): ColorScale {
   const base = convertToOklch(color);
 
   const scale = {} as ColorScale;
 
   for (const step of SCALE_STEPS) {
-    if (step === 500) {
+    const lightness = lightnessMap[step];
+
+    if (lightness === null) {
       scale[step] = color;
       continue;
     }
-
-    const lightness = LIGHTNESS_MAP[step];
 
     scale[step] = convertToHex({
       mode: "oklch",
@@ -36,25 +57,4 @@ function adjustChroma(c: number, step: ColorScaleStep): number {
   }
 
   return c;
-}
-
-/**
- * Calcule la luminosité OKLCH.
- */
-function calculateLightness(step: ScaleStep): number {
-  const values: Record<ScaleStep, number> = {
-    50: 0.97,
-    100: 0.92,
-    200: 0.85,
-    300: 0.75,
-    400: 0.65,
-    500: 0.55,
-    600: 0.45,
-    700: 0.35,
-    800: 0.25,
-    900: 0.18,
-    950: 0.12,
-  };
-
-  return values[step];
 }
