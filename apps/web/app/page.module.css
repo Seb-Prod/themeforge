@@ -1,22 +1,32 @@
-/* ── Bande de dégradé ───────────────────────────────────────── */
-.scale-band {
-  flex: 1;                         /* réparties à parts égales */
+/* ── Grille de carrés ───────────────────────────────────────── */
+.scale-grid {
+  display: flex;
+  flex-wrap: wrap;                 /* passe à la ligne si besoin */
+  gap: 8px;
+  padding: 16px;
+}
+
+/* ── Carré de dégradé ───────────────────────────────────────── */
+.scale-square {
+  width: 96px;                     /* taille fixe, pas trop grande */
+  height: 96px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding-bottom: 12px;
-  gap: 4px;
+  padding-bottom: 8px;
+  gap: 2px;
+  border-radius: 8px;
 }
 
-/* ── Labels sur les bandes ──────────────────────────────────── */
+/* ── Labels sur les carrés ──────────────────────────────────── */
 .scale-step {
   font-weight: 600;                /* nuance mise en avant */
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .scale-hex {
-  font-size: 11px;
+  font-size: 10px;
   opacity: 0.8;                   /* atténué par rapport au step */
 }
 
@@ -27,4 +37,37 @@
 
 .text-light {
   color: #ffffff;                 /* nuances foncées (400 → 950) */
+}
+
+/* ── Ligne de cercles (tokens sémantiques) ─────────────────────── */
+.token-row {
+  display: flex;
+  gap: 24px;
+  padding: 16px;
+}
+
+/* ── Cercle + labels ────────────────────────────────────────────── */
+.token-circle-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.token-circle {
+  width: 64px;                     /* taille fixe, plus petit qu'un carré */
+  height: 64px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);  /* léger contour, utile sur fond blanc */
+}
+
+.token-role {
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: capitalize;      /* background → Background */
+}
+
+.token-hex {
+  font-size: 10px;
+  opacity: 0.8;
 }
