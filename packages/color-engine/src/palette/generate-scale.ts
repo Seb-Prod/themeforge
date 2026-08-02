@@ -1,5 +1,5 @@
 import { ColorScale, ColorScaleStep, HexColor } from "@themeforge/shared";
-import { convertToHex, convertToOklch } from "../color";
+import { adjustOklch, convertToHex, convertToOklch } from "../color";
 
 import { SCALE_STEPS } from "./scale";
 import {
@@ -23,8 +23,6 @@ export function generateScale(
 function getScaleOptions(mode: ThemeMode): ScaleOptions {
   return {
     lightness: mode === "dark" ? DARK_SCALE_LIGHTNESS : LIGHT_SCALE_LIGHTNESS,
-
-    chromaMultiplier: adjustChroma,
   };
 }
 
@@ -44,26 +42,8 @@ function generateScaleFromOptions(
       continue;
     }
 
-    scale[step] = convertToHex({
-      mode: "oklch",
-      l: lightness,
-      c: options.chromaMultiplier
-        ? options.chromaMultiplier(step, base.c)
-        : base.c,
-      h: base.h,
-    });
+    scale[step] = convertToHex(adjustOklch(base, step, lightness));
   }
 
   return scale;
-}
-
-function adjustChroma(
-  step: ColorScaleStep,
-  c: number,
-): number {
-  if (step <= 100 || step >= 900) {
-    return c * 0.75;
-  }
-
-  return c;
 }
