@@ -1,3 +1,4 @@
 export * from "./color";
 export * from "./palette";
-export * from "./sementic";
+export * from "./semantic";
+export * from "./theme";

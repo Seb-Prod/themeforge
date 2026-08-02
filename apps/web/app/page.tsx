@@ -1,6 +1,5 @@
-import {generateScale, generateSemantic} from "@themeforge/color-engine";
+import { createTheme, generateScale, generateSemantic } from "@themeforge/color-engine";
 import styles from "./page.module.css";
-
 
 /**
  * Page d'accueil affichant un dégradé de test de l'échelle de couleurs
@@ -28,6 +27,13 @@ export default function Home() {
   /** Token "solid" par défaut (background / text / border) */
   const solidDefault = tokens.solid.default;
 
+  const theme = createTheme({
+    primary: "#a865cc",
+    accent: "#f5b942",
+  });
+
+  console.log(theme);
+
   return (
     <div>
       <div className={styles["scale-grid"]}>
@@ -35,7 +41,8 @@ export default function Home() {
         {Object.entries(scale).map(([step, hex]) => {
           const color = hex as string;
           /** Contraste texte clair/sombre selon la luminosité de la nuance */
-          const textClass = Number(step) >= 400 ? styles["text-light"] : styles["text-dark"];
+          const textClass =
+            Number(step) >= 400 ? styles["text-light"] : styles["text-dark"];
 
           return (
             <div
