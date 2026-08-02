@@ -1,15 +1,14 @@
 import { SemanticColorTokens } from "../semantic";
-import { getThemeScheme, type ThemeDefinition, type ThemeMode } from "../theme";
+import type { ThemeScheme, ThemeMode } from "../theme";
 import { formatVariables } from "./format-variables";
 
 /**
  * Génère les variables CSS de palette.
  */
 export function generateCssVariables(
-  theme: ThemeDefinition,
+  scheme: ThemeScheme,
   mode: ThemeMode = "light",
 ): string {
-  const scheme = getThemeScheme(theme, mode);
   const variables: string[] = [];
 
   Object.entries(scheme).forEach(([name, color]) => {
