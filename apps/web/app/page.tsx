@@ -1,4 +1,10 @@
-import { createTheme, generateCssVariables, generateScale, generateSemantic } from "@themeforge/color-engine";
+import {
+  createTheme,
+  generateComponentTokens,
+  generateCssVariables,
+  generateScale,
+  generateSemantic,
+} from "@themeforge/color-engine";
 import styles from "./page.module.css";
 
 /**
@@ -32,10 +38,13 @@ export default function Home() {
     accent: "#f5b942",
   });
 
-  console.log(theme);
-  console.log(
-  generateCssVariables(theme)
-);
+  const css = generateCssVariables(theme);
+  const components = generateComponentTokens(theme);
+
+  // console.log(theme);
+  // console.log(generateCssVariables(theme));
+
+  console.log(components);
 
   return (
     <div>
