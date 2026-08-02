@@ -20,7 +20,7 @@ import styles from "./page.module.css";
  */
 export default function Home() {
   /** Couleur de base utilisée pour générer l'échelle */
-  const baseColor = "#af65ba";
+  const baseColor = "#4caf50";
 
   /** Échelle générée (objet { "50": "#...", "100": "#...", ... }) */
   const scale = generateScale(baseColor, "light");

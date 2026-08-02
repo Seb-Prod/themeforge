@@ -2,8 +2,13 @@ import { ColorScale, ColorScaleStep, HexColor } from "@themeforge/shared";
 import { convertToHex, convertToOklch } from "../color";
 
 import { SCALE_STEPS } from "./scale";
-import { DARK_SCALE_LIGHTNESS, LIGHT_SCALE_LIGHTNESS, LightnessMap } from "./constants";
+import {
+  DARK_SCALE_LIGHTNESS,
+  LIGHT_SCALE_LIGHTNESS,
+  LightnessMap,
+} from "./constants";
 import { ThemeMode } from "../theme";
+import { ScaleOptions } from "./types";
 
 /**
  * Génère une échelle OKLCH depuis une couleur.
@@ -12,28 +17,27 @@ export function generateScale(
   color: HexColor,
   mode: ThemeMode = "light",
 ): ColorScale {
-
-  const lightnessMap =
-    mode === "dark"
-      ? DARK_SCALE_LIGHTNESS
-      : LIGHT_SCALE_LIGHTNESS;
-
-  return generateScaleFromLightness(
-    color,
-    lightnessMap,
-  );
+  return generateScaleFromOptions(color, getScaleOptions(mode));
 }
 
-function generateScaleFromLightness(
+function getScaleOptions(mode: ThemeMode): ScaleOptions {
+  return {
+    lightness: mode === "dark" ? DARK_SCALE_LIGHTNESS : LIGHT_SCALE_LIGHTNESS,
+
+    chromaMultiplier: adjustChroma,
+  };
+}
+
+function generateScaleFromOptions(
   color: HexColor,
-  lightnessMap: LightnessMap,
+  options: ScaleOptions,
 ): ColorScale {
   const base = convertToOklch(color);
 
   const scale = {} as ColorScale;
 
   for (const step of SCALE_STEPS) {
-    const lightness = lightnessMap[step];
+    const lightness = options.lightness[step];
 
     if (lightness === null) {
       scale[step] = color;
@@ -43,7 +47,9 @@ function generateScaleFromLightness(
     scale[step] = convertToHex({
       mode: "oklch",
       l: lightness,
-      c: adjustChroma(base.c, step),
+      c: options.chromaMultiplier
+        ? options.chromaMultiplier(step, base.c)
+        : base.c,
       h: base.h,
     });
   }
@@ -51,7 +57,10 @@ function generateScaleFromLightness(
   return scale;
 }
 
-function adjustChroma(c: number, step: ColorScaleStep): number {
+function adjustChroma(
+  step: ColorScaleStep,
+  c: number,
+): number {
   if (step <= 100 || step >= 900) {
     return c * 0.75;
   }
