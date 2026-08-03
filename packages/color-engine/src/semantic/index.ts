@@ -1,2 +1,2 @@
 export * from "./types";
-export * from "./generate-semantic";
+export { generateSemanticTokens } from "./generate-semantic";
