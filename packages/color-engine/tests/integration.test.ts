@@ -1,9 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  createTheme,
-  exportThemeCss,
-  generateComponentTokens,
-} from "../src";
+import { createTheme, exportThemeCss, generateComponentTokens } from "../src";
 
 describe("theme pipeline", () => {
   it("generates a complete theme", () => {
@@ -23,16 +19,14 @@ describe("theme pipeline", () => {
 
     expect(theme.light.colors.primary).toBeDefined();
 
-    expect(theme.light.surfaces.card)
-      .toBe("#ffffff");
+    expect(theme.light.surfaces.card).toBe("#ffffff");
 
-    expect(css)
-      .toContain("--color-primary-solid-default-background");
+    expect(css).toContain("--color-primary-solid-default-background");
 
-    expect(css)
-      .toContain("--surface-card");
+    expect(css).toContain("--surface-card");
 
-    expect(components)
-      .toHaveLength(2);
+    expect(css).toContain('[data-color="primary"]');
+
+    expect(components).toHaveLength(2);
   });
 });

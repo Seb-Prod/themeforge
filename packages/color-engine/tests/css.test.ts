@@ -40,4 +40,18 @@ describe("css export", () => {
     expect(css).toContain(":root");
     expect(css).not.toContain('[data-theme="dark"]');
   });
+
+  it("generates component mappings", () => {
+    const theme = createTheme({
+      colors: {
+        primary: "#a865cc",
+      },
+    });
+
+    const css = exportThemeCss(theme);
+
+    expect(css).toContain('[data-color="primary"]');
+
+    expect(css).toContain("--variant-bg");
+  });
 });
