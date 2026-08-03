@@ -34,17 +34,11 @@ export function createTheme(input: ThemeInput): ThemeDefinition {
   return {
     light: {
       colors: lightColors,
-      surfaces: {
-        ...generateSurfaces("light"),
-        ...input.surfaces,
-      },
+      surfaces: generateSurfaces("light", input.surfaceColor, input.surfaces),
     },
     dark: {
       colors: darkColors,
-      surfaces: {
-        ...generateSurfaces("dark"),
-        ...input.surfaces,
-      },
+      surfaces: generateSurfaces("dark", input.surfaceColor, input.surfaces),
     },
   };
 }

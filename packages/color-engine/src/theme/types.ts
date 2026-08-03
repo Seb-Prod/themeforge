@@ -18,13 +18,7 @@ export interface ThemeColor {
   semantic: SemanticColorTokens;
 }
 
-export interface ThemeSurfaces {
-  background: HexColor;
-  surface: HexColor;
-  surfaceSecondary: HexColor;
-  surfaceTertiary: HexColor;
-  surfaceElevated: HexColor;
-}
+export type ThemeSurfaces = Record<string, HexColor>;
 
 export interface ThemeScheme<T extends string = string> {
   colors: Record<T, ThemeColor>;
@@ -36,6 +30,11 @@ export interface ThemeInput {
    * Couleurs principales du thème.
    */
   colors: Record<string, HexColor>;
+
+  /**
+   * Couleur de référence des surfaces.
+   */
+  surfaceColor?: HexColor;
 
   /**
    * Surfaces personnalisées.

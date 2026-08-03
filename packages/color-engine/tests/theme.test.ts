@@ -54,4 +54,34 @@ describe("theme", () => {
     expect(token.text).toMatch(/^#/);
     expect(token.border).toMatch(/^#/);
   });
+
+  it("generates surfaces from surface color", () => {
+    const theme = createTheme({
+      colors: {
+        primary: "#a865cc",
+      },
+
+      surfaceColor: "#eeeeee",
+    });
+
+    expect(theme.light.surfaces.background).toMatch(/^#/);
+    expect(theme.dark.surfaces.surface).toMatch(/^#/);
+  });
+
+  it("keeps custom surfaces", () => {
+    const theme = createTheme({
+      colors: {
+        primary: "#a865cc",
+      },
+      surfaces: {
+        background: "#ffffff",
+        card: "#eeeeee",
+        sidebar: "#101010",
+      },
+    });
+
+    expect(theme.light.surfaces.card).toBe("#eeeeee");
+
+    expect(theme.light.surfaces.sidebar).toBe("#101010");
+  });
 });

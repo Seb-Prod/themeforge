@@ -1,35 +1,62 @@
-import type { ThemeMode, ThemeSurfaces } from "./types";
+import type { HexColor } from "@themeforge/shared";
+import {
+  adjustOklch,
+  convertToHex,
+  convertToOklch,
+} from "../color";
 
-const DEFAULT_SURFACES: Record<ThemeMode, ThemeSurfaces> = {
-  light: {
-    background: "#ffffff",
-    surface: "#fafafa",
-    surfaceSecondary: "#f4f4f5",
-    surfaceTertiary: "#e4e4e7",
-    surfaceElevated: "#ffffff",
-  },
+import type {
+  ThemeMode,
+  ThemeSurfaces,
+} from "./types";
 
-  dark: {
-    background: "#09090b",
-    surface: "#18181b",
-    surfaceSecondary: "#27272a",
-    surfaceTertiary: "#3f3f46",
-    surfaceElevated: "#52525b",
-  },
-};
 
-/**
- * Génère les surfaces du thème.
- *
- * Les valeurs fournies par l'utilisateur
- * remplacent les valeurs par défaut.
- */
+const DEFAULT_SURFACE_COLOR: HexColor = "#ffffff";
+
+
 export function generateSurfaces(
   mode: ThemeMode,
+  source: HexColor = DEFAULT_SURFACE_COLOR,
   overrides?: Partial<ThemeSurfaces>,
 ): ThemeSurfaces {
+
+  const base = convertToOklch(source);
+
+
+  const surfaces =
+    mode === "light"
+      ? {
+          background: adjust(base, 1),
+          surface: adjust(base, 0.97),
+          surfaceSecondary: adjust(base, 0.94),
+          surfaceTertiary: adjust(base, 0.88),
+          surfaceElevated: adjust(base, 1),
+        }
+      : {
+          background: adjust(base, 0.04),
+          surface: adjust(base, 0.08),
+          surfaceSecondary: adjust(base, 0.12),
+          surfaceTertiary: adjust(base, 0.18),
+          surfaceElevated: adjust(base, 0.22),
+        };
+
+
   return {
-    ...DEFAULT_SURFACES[mode],
+    ...surfaces,
     ...overrides,
   };
+}
+
+
+function adjust(
+  color: ReturnType<typeof convertToOklch>,
+  lightness: number,
+): HexColor {
+
+  return convertToHex(
+    adjustOklch(color,{
+      lightness,
+      chromaFactor:0,
+    }),
+  );
 }

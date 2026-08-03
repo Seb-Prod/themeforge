@@ -16,15 +16,13 @@ export function convertToOklch(color: string): OklchColor {
 
   const result = toOklch(parsed);
 
-  if (result.h === undefined) {
-    throw new Error(`Color has no hue: ${color}`);
-  }
+  const hue = result.h ?? 0;
 
   return {
     mode: "oklch",
     l: result.l,
     c: result.c,
-    h: result.h,
+    h: hue,
     alpha: result.alpha,
   };
 }
