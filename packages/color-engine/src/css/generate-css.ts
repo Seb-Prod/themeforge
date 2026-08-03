@@ -18,8 +18,12 @@ export function generateCssVariables(
   });
 
   Object.entries(scheme.surfaces).forEach(([name, hex]) => {
-    variables[`--surface-${name}`] = hex;
+    variables[`--surface-${toKebabCase(name)}`] = hex;
   });
 
   return variables;
+}
+
+function toKebabCase(value: string): string {
+  return value.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
 }
