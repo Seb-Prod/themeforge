@@ -8,11 +8,16 @@
   "exports": {
     ".": "./src/index.ts"
   },
+  "scripts": {
+    "test": "vitest",
+    "test:watch": "vitest --watch"
+  },
   "dependencies": {
     "@themeforge/shared": "workspace:*",
     "culori": "^4.0.0"
   },
   "devDependencies": {
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
   }
 }

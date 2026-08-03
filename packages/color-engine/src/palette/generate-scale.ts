@@ -1,5 +1,5 @@
 import type { ColorScale, HexColor } from "@themeforge/shared";
-import { adjustOklch, convertToHex, convertToOklch, isInGamut } from "../color";
+import { adjustOklch, convertToHex, convertToOklch, fitToGamut, isInGamut } from "../color";
 import { SCALE_STEPS } from "./scale";
 import type { ScaleStep } from "./scale";
 import { DARK_SCALE_LIGHTNESS, LIGHT_SCALE_LIGHTNESS } from "./constants";
@@ -51,11 +51,7 @@ function generateScaleFromOptions(
       chromaFactor: getChromaFactor(step),
     });
 
-    if (!isInGamut(adjusted)) {
-      console.warn("Out of gamut", step, adjusted);
-    }
-
-    scale[step] = convertToHex(adjusted);
+    scale[step] = convertToHex(fitToGamut(adjusted));
   }
 
   return scale;
