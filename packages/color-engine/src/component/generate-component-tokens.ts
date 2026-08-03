@@ -1,5 +1,4 @@
 import type { ThemeDefinition } from "../theme";
-
 import type { ComponentTokens } from "./types";
 
 /**
@@ -9,8 +8,8 @@ import type { ComponentTokens } from "./types";
 export function generateComponentTokens(
   theme: ThemeDefinition,
 ): ComponentTokens[] {
-  return Object.entries(theme.light).map(([color, value]) => ({
+  return Object.entries(theme.light.colors).map(([color, value]) => ({
     color,
-    variants: value.semantic,
+    semantic: value.semantic,
   }));
 }

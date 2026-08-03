@@ -1,26 +1,17 @@
-import type {
-  SemanticColorTokens,
-} from "../semantic";
-
+import type { SemanticColorTokens } from "../semantic";
 
 /**
  * Tokens disponibles pour une couleur
  * utilisable par les composants.
  */
 export interface ComponentTokens {
-
   /**
-   * Nom de la couleur.
-   *
-   * Exemple :
-   * primary
-   * accent
+   * Nom de la couleur utilisée par le composant.
    */
   color: string;
 
-
   /**
-   * Variantes sémantiques associées.
+   * Tokens sémantiques disponibles.
    */
-  variants: SemanticColorTokens;
+  semantic: SemanticColorTokens;
 }
