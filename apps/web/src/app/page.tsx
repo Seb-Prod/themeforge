@@ -7,6 +7,7 @@ import {
   getReadableTextColor,
 } from "@themeforge/color-engine";
 import styles from "./page.module.css";
+import { Button } from "@/components/ui/Button";
 
 /**
  * Page d'accueil affichant un dégradé de test de l'échelle de couleurs
@@ -112,6 +113,18 @@ export default function Home() {
       >
         Bouton solid.default
       </button>
+
+      <Button>
+        Primary button
+      </Button>
+
+      <Button color="accent">
+        Accent button
+      </Button>
+
+      <Button variant="outline">
+        Outline
+      </Button>
     </div>
   );
 }
