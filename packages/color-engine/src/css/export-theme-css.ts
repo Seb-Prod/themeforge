@@ -18,7 +18,7 @@ export function exportThemeCss(
 
   const scheme = getThemeScheme(theme, mode);
 
-  const variables = generateCssVariables(scheme, mode);
+  const variables = generateCssVariables(scheme);
 
   const rules = formatRules(generateComponentCss(scheme));
 
