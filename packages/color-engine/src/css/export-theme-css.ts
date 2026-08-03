@@ -2,7 +2,7 @@ import { getThemeScheme, type ThemeDefinition } from "../theme";
 import { formatRules } from "./format-css";
 import { generateCssVariables } from "./generate-css";
 import { generateComponentCss } from "./generate-component-css";
-import type {ThemeExportOptions } from "./types";
+import type { ThemeExportOptions } from "./types";
 import type { CssRule } from "./types";
 
 export function exportThemeCss(
@@ -22,8 +22,8 @@ export function exportThemeCss(
     });
 
     rules.push(
-      ...generateComponentCss(scheme),
-    );
+    ...generateComponentCss(scheme)
+  );
   }
 
   if (mode === "dark" || mode === "all") {
@@ -33,11 +33,8 @@ export function exportThemeCss(
       selector: '[data-theme="dark"]',
       declarations: generateCssVariables(scheme),
     });
-
-    rules.push(
-      ...generateComponentCss(scheme),
-    );
   }
+
 
   return formatRules(rules);
 }
