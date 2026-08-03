@@ -5,23 +5,28 @@ import { formatVariables } from "./format-variables";
 /**
  * Génère les variables CSS de palette.
  */
-export function generateCssVariables(
-  scheme: ThemeScheme,
-  mode: ThemeMode = "light",
-): string {
+export function generateCssVariables(scheme: ThemeScheme): string[] {
   const variables: string[] = [];
 
-  Object.entries(scheme).forEach(([name, color]) => {
-    // Palette
+  Object.entries(scheme.colors).forEach(([name, color]) => {
     Object.entries(color.scale).forEach(([step, hex]) => {
       variables.push(`--palette-${name}-${step}: ${hex};`);
     });
 
-    // Semantic
-    variables.push(...generateSemanticVariables(name, color.semantic));
+    Object.entries(color.semantic).forEach(([variant, states]) => {
+      Object.entries(states).forEach(([state, token]) => {
+        variables.push(
+          `--color-${name}-${variant}-${state}-background: ${token.background};`,
+        );
+      });
+    });
   });
 
-  return formatVariables(variables, mode === "dark" ? ".dark" : ":root");
+  Object.entries(scheme.surfaces).forEach(([name, hex]) => {
+    variables.push(`--surface-${name}: ${hex};`);
+  });
+
+  return variables;
 }
 
 /**

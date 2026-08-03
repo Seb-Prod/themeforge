@@ -1,7 +1,13 @@
 import type { HexColor } from "@themeforge/shared";
 import { generateSemanticTokens } from "../semantic";
-import type { ThemeColor, ThemeDefinition, ThemeInput, ThemeMode } from "./types";
+import type {
+  ThemeColor,
+  ThemeDefinition,
+  ThemeInput,
+  ThemeMode,
+} from "./types";
 import { generateScale } from "../palette";
+import { generateSurfaces } from "./generate-surfaces";
 
 function createThemeColor(color: HexColor, mode: ThemeMode): ThemeColor {
   const scale = generateScale(color, mode);
@@ -17,17 +23,22 @@ function createThemeColor(color: HexColor, mode: ThemeMode): ThemeColor {
  * Génère un thème complet.
  */
 export function createTheme(input: ThemeInput): ThemeDefinition {
-  const light = {} as ThemeDefinition["light"];
-  const dark = {} as ThemeDefinition["dark"];
+  const lightColors: Record<string, ThemeColor> = {};
+  const darkColors: Record<string, ThemeColor> = {};
 
   Object.entries(input).forEach(([name, color]) => {
-    light[name] = createThemeColor(color, "light");
-
-    dark[name] = createThemeColor(color, "dark");
+    lightColors[name] = createThemeColor(color, "light");
+    darkColors[name] = createThemeColor(color, "dark");
   });
 
   return {
-    light,
-    dark,
+    light: {
+      colors: lightColors,
+      surfaces: generateSurfaces("light"),
+    },
+    dark: {
+      colors: darkColors,
+      surfaces: generateSurfaces("dark"),
+    },
   };
 }

@@ -35,7 +35,7 @@ export default function Home() {
     accent: "#ffb703",
   });
 
-  const solidDefault = theme.light.primary.semantic.solid.default;
+  const solidDefault = theme.light.colors.primary.semantic.solid.default;
 
   return (
     <div>

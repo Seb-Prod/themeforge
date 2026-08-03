@@ -11,7 +11,7 @@ export function generateComponentCss(
 ): CssRule[] {
   const rules: CssRule[] = [];
 
-  entries(scheme).forEach(([color, value]) => {
+  entries(scheme.colors).forEach(([color, value]) => {
     entries(value.semantic).forEach(([variant, states]) => {
       entries(states).forEach(([state]) => {
         rules.push({

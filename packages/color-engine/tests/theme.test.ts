@@ -7,7 +7,7 @@ describe("theme", () => {
       primary: "#a865cc",
     });
 
-    expect(theme.light.primary.source).toBe("#a865cc");
+    expect(theme.light.colors.primary.source).toBe("#a865cc");
   });
   
   it("creates light and dark themes", () => {
@@ -26,8 +26,8 @@ describe("theme", () => {
       accent: "#ffb703",
     });
 
-    expect(theme.light.primary).toBeDefined();
-    expect(theme.dark.primary).toBeDefined();
+    expect(theme.light.colors.primary).toBeDefined();
+    expect(theme.dark.colors.primary).toBeDefined();
   });
 
   it("generates semantic tokens", () => {
@@ -36,7 +36,7 @@ describe("theme", () => {
       accent: "#ffb703",
     });
 
-    const token = theme.light.primary.semantic.solid.default;
+    const token = theme.light.colors.primary.semantic.solid.default;
 
     expect(token.background).toMatch(/^#/);
     expect(token.text).toMatch(/^#/);

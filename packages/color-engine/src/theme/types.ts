@@ -18,7 +18,20 @@ export interface ThemeColor {
   semantic: SemanticColorTokens;
 }
 
-export type ThemeScheme<T extends string = string> = Record<T, ThemeColor>;
+export interface ThemeSurfaces {
+  background: HexColor;
+  surface: HexColor;
+  surfaceSecondary: HexColor;
+  surfaceTertiary: HexColor;
+  surfaceElevated: HexColor;
+}
+
+// export type ThemeScheme<T extends string = string> = Record<T, ThemeColor>;
+
+export interface ThemeScheme<T extends string= string> {
+  colors: Record<T, ThemeColor>;
+  surfaces: ThemeSurfaces;
+}
 
 export type ThemeInput = Record<string, HexColor>;
 
