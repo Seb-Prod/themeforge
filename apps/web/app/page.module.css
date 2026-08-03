@@ -71,3 +71,22 @@
   font-size: 10px;
   opacity: 0.8;
 }
+
+/* ── Bouton (token solid.default) ───────────────────────────── */
+.token-button {
+  padding: 0.75rem 1.5rem;                    /* confort de clic */
+  border: 2px solid;                          /* couleur définie inline via style */
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;             /* léger feedback au survol */
+}
+
+.token-button:hover {
+  opacity: 0.85;                              /* effet hover discret sans changer les couleurs */
+}
+
+.token-button:active {
+  opacity: 0.7;
+}

@@ -1,3 +1,4 @@
+/// <reference path="../types/culori.d.ts" />
 export * from "./color";
 export * from "./palette";
 export * from "./semantic";

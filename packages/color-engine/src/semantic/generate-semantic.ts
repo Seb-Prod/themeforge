@@ -1,190 +1,28 @@
-import type {
-  ColorScale,
-} from "@themeforge/shared";
+import type { ColorScale } from "@themeforge/shared";
 
-import type {
-  SemanticColorTokens,
-  SemanticToken,
-} from "./types";
-
-
-function createToken(
-  background: keyof ColorScale,
-  text: keyof ColorScale,
-  border: keyof ColorScale,
-  scale: ColorScale
-): SemanticToken {
-
-  return {
-    background: scale[background],
-    text: scale[text],
-    border: scale[border],
-  };
-}
-
+import type { SemanticColorTokens } from "./types";
+import { SEMANTIC_RULES } from "./rules";
+import { createSemanticToken } from "./create-token";
+import { entries } from "../utils";
 
 /**
  * Génère les tokens sémantiques
  * depuis une palette.
  */
-export function generateSemanticTokens(
-  scale: ColorScale
-): SemanticColorTokens {
+export function generateSemanticTokens(scale: ColorScale): SemanticColorTokens {
+  const tokens = {} as SemanticColorTokens;
 
-  return {
+  entries(SEMANTIC_RULES).forEach(([variant, states]) => {
+    if (!states) {
+      return;
+    }
 
-    solid: {
-      default: createToken(
-        500,
-        50,
-        500,
-        scale
-      ),
+    tokens[variant] = {} as SemanticColorTokens[typeof variant];
 
-      hover: createToken(
-        600,
-        50,
-        600,
-        scale
-      ),
+    entries(states).forEach(([state, rule]) => {
+      tokens[variant][state] = createSemanticToken(rule, scale);
+    });
+  });
 
-      active: createToken(
-        700,
-        50,
-        700,
-        scale
-      ),
-
-      disabled: createToken(
-        300,
-        500,
-        300,
-        scale
-      ),
-    },
-
-
-    soft: {
-      default: createToken(
-        100,
-        700,
-        100,
-        scale
-      ),
-
-      hover: createToken(
-        200,
-        800,
-        200,
-        scale
-      ),
-
-      active: createToken(
-        300,
-        900,
-        300,
-        scale
-      ),
-
-      disabled: createToken(
-        100,
-        400,
-        100,
-        scale
-      ),
-    },
-
-
-    outline: {
-      default: createToken(
-        50,
-        600,
-        500,
-        scale
-      ),
-
-      hover: createToken(
-        100,
-        700,
-        600,
-        scale
-      ),
-
-      active: createToken(
-        200,
-        800,
-        700,
-        scale
-      ),
-
-      disabled: createToken(
-        50,
-        400,
-        200,
-        scale
-      ),
-    },
-
-
-    ghost: {
-      default: createToken(
-        50,
-        600,
-        50,
-        scale
-      ),
-
-      hover: createToken(
-        100,
-        700,
-        100,
-        scale
-      ),
-
-      active: createToken(
-        200,
-        800,
-        200,
-        scale
-      ),
-
-      disabled: createToken(
-        50,
-        400,
-        50,
-        scale
-      ),
-    },
-
-
-    link: {
-      default: createToken(
-        50,
-        600,
-        50,
-        scale
-      ),
-
-      hover: createToken(
-        50,
-        700,
-        50,
-        scale
-      ),
-
-      active: createToken(
-        50,
-        800,
-        50,
-        scale
-      ),
-
-      disabled: createToken(
-        50,
-        400,
-        50,
-        scale
-      ),
-    },
-  };
+  return tokens;
 }

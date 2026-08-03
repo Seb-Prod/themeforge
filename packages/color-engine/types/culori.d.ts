@@ -15,6 +15,10 @@ declare module "culori" {
     alpha?: number;
   }
 
+  export type Color =
+    | Rgb
+    | Oklch;
+
   export function inGamut(
     mode?: string,
   ): (color: unknown) => boolean;
@@ -29,5 +33,5 @@ declare module "culori" {
 
   export function parse(
     color: string,
-  ): unknown;
+  ): Color | undefined;
 }

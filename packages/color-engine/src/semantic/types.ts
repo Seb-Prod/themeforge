@@ -19,6 +19,7 @@ export type SemanticState =
   | "default"
   | "hover"
   | "active"
+  | "focus"
   | "disabled";
 
 

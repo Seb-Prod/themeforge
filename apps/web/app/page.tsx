@@ -2,6 +2,8 @@ import {
   createTheme,
   generateScale,
   generateSemanticTokens,
+  getContrastRatio,
+  getReadableTextColor,
 } from "@themeforge/color-engine";
 import styles from "./page.module.css";
 
@@ -14,30 +16,26 @@ import styles from "./page.module.css";
  * - Le code hex et le label de nuance affichés en overlay sur chaque carré
  * - En dessous, des cercles affichant le token sémantique "solid.default"
  *   (background / text / border)
+ * - Un bouton stylé avec les couleurs du token "solid.default"
  *
  * Comportement dynamique :
  * - Aucune interaction pour l'instant, affichage statique de la palette
  */
 export default function Home() {
   /** Couleur de base utilisée pour générer l'échelle */
-  const baseColor = "#a865cc";
+  const baseColor = "#492923";
 
   /** Échelle générée (objet { "50": "#...", "100": "#...", ... }) */
+
   const scale = generateScale(baseColor, "light");
   const scaleDark = generateScale(baseColor, "dark");
 
-  /** Tokens sémantiques dérivés de l'échelle */
-  const tokens = generateSemanticTokens(scale);
-
-  /** Token "solid" par défaut (background / text / border) */
-  const solidDefault = tokens.solid.default;
-
   const theme = createTheme({
-    brand: "#a865cc",
+    primary: "#a865cc",
+    accent: "#ffb703",
   });
 
-  console.log(theme.light);
-  console.log(theme.dark);
+  const solidDefault = theme.light.primary.semantic.solid.default;
 
   return (
     <div>
@@ -46,16 +44,17 @@ export default function Home() {
         {Object.entries(scale).map(([step, hex]) => {
           const color = hex as string;
           /** Contraste texte clair/sombre selon la luminosité de la nuance */
-          const textClass =
-            Number(step) >= 400 ? styles["text-light"] : styles["text-dark"];
+          const textColor = getReadableTextColor(color as any);
 
           return (
             <div
               key={step}
-              className={[styles["scale-square"], textClass].join(" ")}
-              style={{ backgroundColor: color }}
+              className={styles["scale-square"]}
+              style={{
+                backgroundColor: color,
+                color: textColor,
+              }}
             >
-              {/* ── Labels ── */}
               <span className={styles["scale-step"]}>{step}</span>
               <span className={styles["scale-hex"]}>{color}</span>
             </div>
@@ -67,17 +66,17 @@ export default function Home() {
         {/* ── Carrés de couleur ── */}
         {Object.entries(scaleDark).map(([step, hex]) => {
           const color = hex as string;
-          /** Contraste texte clair/sombre selon la luminosité de la nuance */
-          const textClass =
-            Number(step) >= 500 ? styles["text-dark"] : styles["text-light"];
+          const textColor = getReadableTextColor(color as any);
 
           return (
             <div
               key={step}
-              className={[styles["scale-square"], textClass].join(" ")}
-              style={{ backgroundColor: color }}
+              className={styles["scale-square"]}
+              style={{
+                backgroundColor: color,
+                color: textColor,
+              }}
             >
-              {/* ── Labels ── */}
               <span className={styles["scale-step"]}>{step}</span>
               <span className={styles["scale-hex"]}>{color}</span>
             </div>
@@ -99,6 +98,18 @@ export default function Home() {
           </div>
         ))}
       </div>
+
+      {/* ── Bouton "solid.default" ── */}
+      <button
+        className={styles["token-button"]}
+        style={{
+          backgroundColor: solidDefault.background,
+          color: solidDefault.text,
+          borderColor: solidDefault.border,
+        }}
+      >
+        Bouton solid.default
+      </button>
     </div>
   );
 }

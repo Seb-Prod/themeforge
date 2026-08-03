@@ -14,7 +14,10 @@ export function adjustOklch(
 
     l: options.lightness,
 
-    c: options.chromaFactor ? color.c * options.chromaFactor : color.c,
+    c:
+      options.chromaFactor !== undefined
+        ? color.c * options.chromaFactor
+        : color.c,
 
     h: color.h,
 
