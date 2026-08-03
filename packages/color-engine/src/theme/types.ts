@@ -3,6 +3,11 @@ import type { SemanticColorTokens } from "../semantic";
 
 export interface ThemeColor {
   /**
+   * Couleur d'origine fournie par l'utilisateur.
+   */
+  source: HexColor;
+
+  /**
    * Palette brute générée.
    */
   scale: ColorScale;
@@ -13,13 +18,13 @@ export interface ThemeColor {
   semantic: SemanticColorTokens;
 }
 
-export type ThemeScheme = Record<string, ThemeColor>;
+export type ThemeScheme<T extends string = string> = Record<T, ThemeColor>;
 
 export type ThemeInput = Record<string, HexColor>;
 
-export interface ThemeDefinition {
-  light: ThemeScheme;
-  dark: ThemeScheme;
+export interface ThemeDefinition<T extends string = string> {
+  light: ThemeScheme<T>;
+  dark: ThemeScheme<T>;
 }
 
 export type ThemeMode = "light" | "dark";

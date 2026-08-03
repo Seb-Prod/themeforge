@@ -7,6 +7,7 @@ function createThemeColor(color: HexColor, mode: ThemeMode): ThemeColor {
   const scale = generateScale(color, mode);
 
   return {
+    source: color,
     scale,
     semantic: generateSemanticTokens(scale),
   };
