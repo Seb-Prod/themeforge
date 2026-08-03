@@ -6,40 +6,20 @@ import { generateSemanticVariables } from "./generate-semantic-variables";
  */
 export function generateCssVariables(
   scheme: ThemeScheme,
-): string[] {
+): Record<string, string> {
+  const variables: Record<string, string> = {};
 
-  const variables: string[] = [];
+  Object.entries(scheme.colors).forEach(([name, color]) => {
+    Object.entries(color.scale).forEach(([step, hex]) => {
+      variables[`--palette-${name}-${step}`] = hex;
+    });
 
-  Object.entries(scheme.colors).forEach(
-    ([name, color]) => {
+    Object.assign(variables, generateSemanticVariables(name, color.semantic));
+  });
 
-      Object.entries(color.scale).forEach(
-        ([step, hex]) => {
-          variables.push(
-            `--palette-${name}-${step}: ${hex};`,
-          );
-        },
-      );
-
-
-      variables.push(
-        ...generateSemanticVariables(
-          name,
-          color.semantic,
-        ),
-      );
-    },
-  );
-
-
-  Object.entries(scheme.surfaces).forEach(
-    ([name, hex]) => {
-      variables.push(
-        `--surface-${name}: ${hex};`,
-      );
-    },
-  );
-
+  Object.entries(scheme.surfaces).forEach(([name, hex]) => {
+    variables[`--surface-${name}`] = hex;
+  });
 
   return variables;
 }

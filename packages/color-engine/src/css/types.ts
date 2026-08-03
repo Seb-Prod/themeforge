@@ -1,4 +1,4 @@
-import { ThemeMode } from "../theme";
+import type { ThemeMode } from "../theme";
 
 /**
  * Une règle CSS générée par ThemeForge.
@@ -15,6 +15,8 @@ export interface CssRule {
   declarations: Record<string, string>;
 }
 
+export type ThemeExportMode = ThemeMode | "all";
+
 export interface ThemeExportOptions {
-  mode?: ThemeMode;
+  mode?: ThemeExportMode;
 }

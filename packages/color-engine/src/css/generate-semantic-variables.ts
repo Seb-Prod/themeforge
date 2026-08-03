@@ -6,22 +6,17 @@ import type { SemanticColorTokens } from "../semantic";
 export function generateSemanticVariables(
   name: string,
   semantic: SemanticColorTokens,
-): string[] {
-  const variables: string[] = [];
+): Record<string, string> {
+  const variables: Record<string, string> = {};
 
   Object.entries(semantic).forEach(([variant, states]) => {
     Object.entries(states).forEach(([state, token]) => {
-      variables.push(
-        `--color-${name}-${variant}-${state}-background: ${token.background};`,
-      );
+      variables[`--color-${name}-${variant}-${state}-background`] =
+        token.background;
 
-      variables.push(
-        `--color-${name}-${variant}-${state}-text: ${token.text};`,
-      );
+      variables[`--color-${name}-${variant}-${state}-text`] = token.text;
 
-      variables.push(
-        `--color-${name}-${variant}-${state}-border: ${token.border};`,
-      );
+      variables[`--color-${name}-${variant}-${state}-border`] = token.border;
     });
   });
 

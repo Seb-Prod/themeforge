@@ -1,26 +1,33 @@
 import { getThemeScheme, type ThemeDefinition } from "../theme";
-
-import { generateComponentCss } from "./generate-component-css";
-
 import { formatRules } from "./format-css";
-
 import { generateCssVariables } from "./generate-css";
 import type { ThemeExportOptions } from "./types";
 
-/**
- * Génère le fichier CSS complet du thème.
- */
 export function exportThemeCss(
   theme: ThemeDefinition,
   options: ThemeExportOptions = {},
 ): string {
-  const mode = options.mode ?? "light";
+  const mode = options.mode ?? "all";
 
-  const scheme = getThemeScheme(theme, mode);
+  const rules = [];
 
-  const variables = generateCssVariables(scheme);
+  if (mode === "light" || mode === "all") {
+    const scheme = getThemeScheme(theme, "light");
 
-  const rules = formatRules(generateComponentCss(scheme));
+    rules.push({
+      selector: ":root",
+      declarations: generateCssVariables(scheme),
+    });
+  }
 
-  return [variables, "", rules].join("\n");
+  if (mode === "dark" || mode === "all") {
+    const scheme = getThemeScheme(theme, "dark");
+
+    rules.push({
+      selector: '[data-theme="dark"]',
+      declarations: generateCssVariables(scheme),
+    });
+  }
+
+  return formatRules(rules);
 }

@@ -1,4 +1,4 @@
-import { ThemeScheme, type ThemeMode } from "../theme";
+import type { ThemeScheme } from "../theme";
 import { CssRule } from "../css";
 import { entries } from "../utils";
 

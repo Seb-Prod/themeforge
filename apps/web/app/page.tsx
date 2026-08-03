@@ -23,7 +23,7 @@ import styles from "./page.module.css";
  */
 export default function Home() {
   /** Couleur de base utilisée pour générer l'échelle */
-  const baseColor = "#492923";
+  const baseColor = "#fbf6ff";
 
   /** Échelle générée (objet { "50": "#...", "100": "#...", ... }) */
 
@@ -31,7 +31,7 @@ export default function Home() {
   const scaleDark = generateScale(baseColor, "dark");
 
   const theme = createTheme({
-    primary: "#a865cc",
+    primary: "#0f0c10",
     accent: "#ffb703",
   });
 
