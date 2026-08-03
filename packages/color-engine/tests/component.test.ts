@@ -4,8 +4,10 @@ import { createTheme, generateComponentTokens } from "../src";
 describe("component tokens", () => {
   it("generates component tokens from theme", () => {
     const theme = createTheme({
-      primary: "#a865cc",
-      accent: "#ffb703",
+      colors: {
+        primary: "#a865cc",
+        accent: "#ffb703",
+      },
     });
 
     const tokens = generateComponentTokens(theme);

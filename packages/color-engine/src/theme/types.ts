@@ -26,14 +26,22 @@ export interface ThemeSurfaces {
   surfaceElevated: HexColor;
 }
 
-// export type ThemeScheme<T extends string = string> = Record<T, ThemeColor>;
-
-export interface ThemeScheme<T extends string= string> {
+export interface ThemeScheme<T extends string = string> {
   colors: Record<T, ThemeColor>;
   surfaces: ThemeSurfaces;
 }
 
-export type ThemeInput = Record<string, HexColor>;
+export interface ThemeInput {
+  /**
+   * Couleurs principales du thème.
+   */
+  colors: Record<string, HexColor>;
+
+  /**
+   * Surfaces personnalisées.
+   */
+  surfaces?: Partial<ThemeSurfaces>;
+}
 
 export interface ThemeDefinition<T extends string = string> {
   light: ThemeScheme<T>;

@@ -32,8 +32,7 @@ export default function Home() {
   const scaleDark = generateScale(baseColor, "dark");
 
   const theme = createTheme({
-    primary: "#a865cc",
-    accent: "#ffb703",
+    colors: { primary: "#a865cc", accent: "#ffb703" },
   });
 
   const solidDefault = theme.light.colors.primary.semantic.solid.default;

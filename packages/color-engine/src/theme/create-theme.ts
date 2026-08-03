@@ -26,7 +26,7 @@ export function createTheme(input: ThemeInput): ThemeDefinition {
   const lightColors: Record<string, ThemeColor> = {};
   const darkColors: Record<string, ThemeColor> = {};
 
-  Object.entries(input).forEach(([name, color]) => {
+  Object.entries(input.colors).forEach(([name, color]) => {
     lightColors[name] = createThemeColor(color, "light");
     darkColors[name] = createThemeColor(color, "dark");
   });
@@ -34,11 +34,17 @@ export function createTheme(input: ThemeInput): ThemeDefinition {
   return {
     light: {
       colors: lightColors,
-      surfaces: generateSurfaces("light"),
+      surfaces: {
+        ...generateSurfaces("light"),
+        ...input.surfaces,
+      },
     },
     dark: {
       colors: darkColors,
-      surfaces: generateSurfaces("dark"),
+      surfaces: {
+        ...generateSurfaces("dark"),
+        ...input.surfaces,
+      },
     },
   };
 }

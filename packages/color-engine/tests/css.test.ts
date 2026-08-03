@@ -1,15 +1,16 @@
 import { describe, expect, it } from "vitest";
-import {
-  createTheme,
-  exportThemeCss,
-} from "../src";
+import { createTheme, exportThemeCss } from "../src";
 
 describe("css export", () => {
   const theme = createTheme({
-    primary: "#a865cc",
-    accent: "#ffb703",
+    colors: {
+      primary: "#a865cc",
+      accent: "#ffb703",
+    },
+    surfaces: {
+      background: "#101010",
+    },
   });
-
 
   it("generates css variables from theme", () => {
     const css = exportThemeCss(theme);
@@ -21,7 +22,6 @@ describe("css export", () => {
     expect(css).toContain("--surface-background");
   });
 
-
   it("contains primary semantic tokens", () => {
     const css = exportThemeCss(theme);
 
@@ -31,7 +31,6 @@ describe("css export", () => {
     expect(css).toContain("text");
     expect(css).toContain("border");
   });
-
 
   it("can export only one theme mode", () => {
     const css = exportThemeCss(theme, {

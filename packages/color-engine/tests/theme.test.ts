@@ -4,16 +4,20 @@ import { createTheme } from "../src/theme";
 describe("theme", () => {
   it("keeps source color", () => {
     const theme = createTheme({
-      primary: "#a865cc",
+      colors: {
+        primary: "#a865cc",
+      },
     });
 
     expect(theme.light.colors.primary.source).toBe("#a865cc");
   });
-  
+
   it("creates light and dark themes", () => {
     const theme = createTheme({
-      primary: "#a865cc",
-      accent: "#ffb703",
+      colors: {
+        primary: "#a865cc",
+        accent: "#ffb703",
+      },
     });
 
     expect(theme).toHaveProperty("light");
@@ -22,8 +26,10 @@ describe("theme", () => {
 
   it("generates primary color schemes", () => {
     const theme = createTheme({
-      primary: "#a865cc",
-      accent: "#ffb703",
+      colors: {
+        primary: "#a865cc",
+        accent: "#ffb703",
+      },
     });
 
     expect(theme.light.colors.primary).toBeDefined();
@@ -32,12 +38,18 @@ describe("theme", () => {
 
   it("generates semantic tokens", () => {
     const theme = createTheme({
-      primary: "#a865cc",
-      accent: "#ffb703",
+      colors: {
+        primary: "#a865cc",
+        accent: "#ffb703",
+      },
+      surfaces: {
+        background: "#101010",
+      },
     });
 
     const token = theme.light.colors.primary.semantic.solid.default;
 
+    expect(theme.light.surfaces.background).toBe("#101010");
     expect(token.background).toMatch(/^#/);
     expect(token.text).toMatch(/^#/);
     expect(token.border).toMatch(/^#/);
