@@ -12,6 +12,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       },
     });
 
+    
+
     const style = document.createElement("style");
 
     style.id = "themeforge";
@@ -19,7 +21,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     style.textContent = exportThemeCss(theme);
 
     document.head.appendChild(style);
-
+    console.log(style)
     return () => {
       style.remove();
     };

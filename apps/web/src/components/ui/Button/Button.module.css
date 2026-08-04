@@ -1,10 +1,10 @@
 .root {
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius-md);
-
-  background: var(--variant-bg);
+  background: var(--variant-background);
   color: var(--variant-text);
   border: 1px solid var(--variant-border);
+
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
 
   cursor: pointer;
 
@@ -12,4 +12,32 @@
     background .2s,
     color .2s,
     border-color .2s;
+}
+
+
+.root:hover {
+  background: var(--variant-hover-background);
+  color: var(--variant-hover-text);
+  border-color: var(--variant-hover-border);
+}
+
+
+.root:active {
+  background: var(--variant-active-background);
+  color: var(--variant-active-text);
+  border-color: var(--variant-active-border);
+}
+
+
+.root:focus-visible {
+  background: var(--variant-focus-background);
+  color: var(--variant-focus-text);
+  border-color: var(--variant-focus-border);
+}
+
+
+.root:disabled {
+  background: var(--variant-disabled-background);
+  color: var(--variant-disabled-text);
+  border-color: var(--variant-disabled-border);
 }

@@ -3,8 +3,12 @@ import { CssRule } from "../css";
 import { entries } from "../utils";
 
 /**
- * Génère les mappings CSS dynamiques
- * utilisés par les composants.
+ * Génère les variables CSS de variantes consommées
+ * par les composants.
+ *
+ * Les états ne sont pas appliqués ici.
+ * Le composant gère les pseudo-classes CSS :
+ * :hover, :active, :focus-visible, :disabled
  */
 export function generateComponentCss(
   scheme: ThemeScheme,
@@ -13,19 +17,37 @@ export function generateComponentCss(
 
   entries(scheme.colors).forEach(([color, value]) => {
     entries(value.semantic).forEach(([variant, states]) => {
+
+      const declarations: Record<string, string> = {};
+
       entries(states).forEach(([state]) => {
-        rules.push({
-          selector: `[data-color="${color}"][data-variant="${variant}"][data-state="${state}"]`,
+        const prefix =
+          state === "default"
+            ? "variant"
+            : `variant-${state}`;
 
-          declarations: {
-            "--variant-bg": `var(--color-${color}-${variant}-${state}-background)`,
+        declarations[
+          `--${prefix}-background`
+        ] =
+          `var(--color-${color}-${variant}-${state}-background)`;
 
-            "--variant-text": `var(--color-${color}-${variant}-${state}-text)`,
+        declarations[
+          `--${prefix}-text`
+        ] =
+          `var(--color-${color}-${variant}-${state}-text)`;
 
-            "--variant-border": `var(--color-${color}-${variant}-${state}-border)`,
-          },
-        });
+        declarations[
+          `--${prefix}-border`
+        ] =
+          `var(--color-${color}-${variant}-${state}-border)`;
       });
+
+
+      rules.push({
+        selector: `[data-color="${color}"][data-variant="${variant}"]`,
+        declarations,
+      });
+
     });
   });
 
