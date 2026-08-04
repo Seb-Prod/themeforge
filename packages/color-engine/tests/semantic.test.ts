@@ -3,6 +3,8 @@ import {
   generateScale,
   generateSemanticTokens,
 } from "../src";
+import { createSemanticToken } from "../src/semantic/create-token";
+import { SEMANTIC_RULES } from "../src/semantic/rules";
 
 describe("semantic tokens", () => {
   it("generates all semantic variants", () => {
@@ -41,5 +43,16 @@ describe("semantic tokens", () => {
       tokens.solid.default;
 
     expect(token.text).toBeDefined();
+  });
+
+  it("keeps transparent colors", () => {
+    const scale = generateScale("#a865cc", "light");
+    
+    const token = createSemanticToken(
+      SEMANTIC_RULES.outline.default,
+      scale,
+    );
+
+    expect(token.background).toBe("transparent");
   });
 });

@@ -79,4 +79,22 @@ describe("css export", () => {
       "--color-primary-ghost-default-background: transparent",
     );
   });
+
+  it("generates transparent backgrounds for outline and ghost variants", () => {
+    const theme = createTheme({
+      colors: {
+        primary: "#a865cc",
+      },
+    });
+
+    const css = exportThemeCss(theme);
+
+    expect(css).toContain(
+      "--color-primary-outline-default-background: transparent",
+    );
+
+    expect(css).toContain(
+      "--color-primary-ghost-default-background: transparent",
+    );
+  });
 });
