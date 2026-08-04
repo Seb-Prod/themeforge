@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "tsx scripts/start.ts",
+    "check": "tsx scripts/check.ts",
     "pretest": "clear || cls",
     "test": "pnpm -r test",
     "test:color-engine": "pnpm --filter @themeforge/color-engine test",
