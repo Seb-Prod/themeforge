@@ -50,9 +50,7 @@ describe("css export", () => {
 
     const css = exportThemeCss(theme);
 
-    expect(css).toContain(
-      '[data-color="primary"][data-variant="solid"]'
-    );
+    expect(css).toContain('[data-color="primary"][data-variant="solid"]');
 
     expect(css).toContain("--variant-background");
     expect(css).toContain("--variant-hover-background");
@@ -62,5 +60,23 @@ describe("css export", () => {
 
     expect(css).not.toContain("data-state");
     expect(css).not.toContain("--variant-bg");
+  });
+
+  it("generates transparent backgrounds for outline and ghost variants", () => {
+    const theme = createTheme({
+      colors: {
+        primary: "#a865cc",
+      },
+    });
+
+    const css = exportThemeCss(theme);
+
+    expect(css).toContain(
+      "--color-primary-outline-default-background: transparent",
+    );
+
+    expect(css).toContain(
+      "--color-primary-ghost-default-background: transparent",
+    );
   });
 });
