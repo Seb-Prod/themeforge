@@ -48,3 +48,16 @@ export interface ThemeDefinition<T extends string = string> {
 }
 
 export type ThemeMode = "light" | "dark";
+
+export interface ThemeTokens {
+  background: HexColor;
+  foreground: HexColor;
+  border: HexColor;
+  muted: HexColor;
+}
+
+export interface ThemeScheme<T extends string = string> {
+  colors: Record<T, ThemeColor>;
+  surfaces: ThemeSurfaces;
+  tokens: ThemeTokens;
+}

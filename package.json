@@ -8,6 +8,7 @@
     "pretest": "clear || cls",
     "test": "pnpm -r test",
     "test:color-engine": "pnpm --filter @themeforge/color-engine test",
+    "typecheck": "pnpm -r typecheck",
     "typecheck:shared": "pnpm exec tsc -p packages/shared/tsconfig.json --noEmit",
     "typecheck:web": "pnpm exec tsc -p apps/web/tsconfig.json --noEmit",
     "typecheck:api": "pnpm exec tsc -p apps/api/tsconfig.json --noEmit",
