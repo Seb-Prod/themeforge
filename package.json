@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "tsx scripts/start.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "pretest": "clear || cls",
+    "test": "pnpm -r test",
+    "test:color-engine": "pnpm --filter @themeforge/color-engine test",
     "typecheck:shared": "pnpm exec tsc -p packages/shared/tsconfig.json --noEmit",
     "typecheck:web": "pnpm exec tsc -p apps/web/tsconfig.json --noEmit",
     "typecheck:api": "pnpm exec tsc -p apps/api/tsconfig.json --noEmit",

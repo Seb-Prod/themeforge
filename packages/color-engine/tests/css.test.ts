@@ -50,8 +50,17 @@ describe("css export", () => {
 
     const css = exportThemeCss(theme);
 
-    expect(css).toContain('[data-color="primary"]');
+    expect(css).toContain(
+      '[data-color="primary"][data-variant="solid"]'
+    );
 
-    expect(css).toContain("--variant-bg");
+    expect(css).toContain("--variant-background");
+    expect(css).toContain("--variant-hover-background");
+    expect(css).toContain("--variant-active-background");
+    expect(css).toContain("--variant-focus-background");
+    expect(css).toContain("--variant-disabled-background");
+
+    expect(css).not.toContain("data-state");
+    expect(css).not.toContain("--variant-bg");
   });
 });
