@@ -106,4 +106,29 @@ describe("css export", () => {
     expect(css).toContain("--theme-border");
     expect(css).toContain("--theme-muted");
   });
+
+  it("exports all theme layers", () => {
+    const css = exportThemeCss(theme);
+
+    // Palette
+    expect(css).toContain("--palette-primary-500");
+
+    // Semantic tokens
+    expect(css).toContain("--color-primary-solid-default-background");
+
+    // Surfaces
+    expect(css).toContain("--surface-background");
+
+    // Theme tokens
+    expect(css).toContain("--theme-background");
+    expect(css).toContain("--theme-foreground");
+
+    // Component mappings
+    expect(css).toContain('[data-color="primary"]');
+    expect(css).toContain("--variant-background");
+    expect(css).toContain("--variant-hover-background");
+    expect(css).toContain("--variant-active-background");
+    expect(css).toContain("--variant-focus-background");
+    expect(css).toContain("--variant-disabled-background");
+  });
 });
