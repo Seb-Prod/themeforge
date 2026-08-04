@@ -7,17 +7,23 @@ export function createSemanticToken(
   rule: SemanticRule,
   scale: ColorScale,
 ): SemanticToken {
-
-  const background = scale[rule.background];
+  const background = resolveColor(rule.background, scale);
 
   return {
     background,
 
     text:
       rule.text === "auto"
-        ? getReadableTextColor(background)
+        ? getReadableTextColor(background === "transparent" ? scale[500] : background)
         : scale[rule.text],
 
-    border: scale[rule.border],
+    border: resolveColor(rule.border, scale),
   };
+}
+
+function resolveColor(
+  value: keyof ColorScale | "transparent",
+  scale: ColorScale,
+) {
+  return value === "transparent" ? "transparent" : scale[value];
 }

@@ -1,11 +1,36 @@
 "use client";
 
 import { useEffect } from "react";
-import { injectTheme } from "./inject-theme";
+import { createTheme, exportThemeCss } from "@themeforge/color-engine";
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    injectTheme();
+    const theme = createTheme({
+      colors: {
+        primary: "#a865cc",
+        accent: "#ffb703",
+      },
+    });
+
+    const style = document.createElement("style");
+
+    style.id = "themeforge";
+
+    style.textContent = exportThemeCss(theme);
+
+    document.head.appendChild(style);
+
+    return () => {
+      style.remove();
+    };
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    root.dataset.theme = dark ? "dark" : "light";
   }, []);
 
   return children;

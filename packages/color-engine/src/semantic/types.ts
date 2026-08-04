@@ -1,16 +1,9 @@
 import type { HexColor } from "@themeforge/shared";
 
-
 /**
  * Variantes visuelles disponibles pour une couleur.
  */
-export type SemanticVariant =
-  | "solid"
-  | "soft"
-  | "outline"
-  | "ghost"
-  | "link";
-
+export type SemanticVariant = "solid" | "soft" | "outline" | "ghost" | "link";
 
 /**
  * États interactifs d'un composant.
@@ -22,6 +15,7 @@ export type SemanticState =
   | "focus"
   | "disabled";
 
+export type CssColor = HexColor | "transparent";
 
 /**
  * Tokens exposés par une variante.
@@ -32,11 +26,10 @@ export type SemanticState =
  * solid.hover.text
  */
 export interface SemanticToken {
-  background: HexColor;
+  background: CssColor;
   text: HexColor;
-  border: HexColor;
+  border: CssColor;
 }
-
 
 /**
  * Ensemble des tokens sémantiques

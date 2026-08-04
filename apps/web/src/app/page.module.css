@@ -1,92 +1,14 @@
-/* ── Grille de carrés ───────────────────────────────────────── */
-.scale-grid {
+.page {
+  min-height: 100vh;
+  padding: 40px;
+  background: var(--surface-background);
+  color: var(--surface-text);
+}
+
+
+.buttons {
   display: flex;
-  flex-wrap: wrap;                 /* passe à la ligne si besoin */
-  gap: 8px;
-  padding: 16px;
-}
-
-/* ── Carré de dégradé ───────────────────────────────────────── */
-.scale-square {
-  width: 96px;                     /* taille fixe, pas trop grande */
-  height: 96px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  padding-bottom: 8px;
-  gap: 2px;
-  border-radius: 8px;
-}
-
-/* ── Labels sur les carrés ──────────────────────────────────── */
-.scale-step {
-  font-weight: 600;                /* nuance mise en avant */
-  font-size: 13px;
-}
-
-.scale-hex {
-  font-size: 10px;
-  opacity: 0.8;                   /* atténué par rapport au step */
-}
-
-/* ── Contraste texte selon fond ─────────────────────────────── */
-.text-dark {
-  color: #1a1a1a;                 /* nuances claires (50 → 300) */
-}
-
-.text-light {
-  color: #ffffff;                 /* nuances foncées (400 → 950) */
-}
-
-/* ── Ligne de cercles (tokens sémantiques) ─────────────────────── */
-.token-row {
-  display: flex;
-  gap: 24px;
-  padding: 16px;
-}
-
-/* ── Cercle + labels ────────────────────────────────────────────── */
-.token-circle-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-
-.token-circle {
-  width: 64px;                     /* taille fixe, plus petit qu'un carré */
-  height: 64px;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.1);  /* léger contour, utile sur fond blanc */
-}
-
-.token-role {
-  font-weight: 600;
-  font-size: 13px;
-  text-transform: capitalize;      /* background → Background */
-}
-
-.token-hex {
-  font-size: 10px;
-  opacity: 0.8;
-}
-
-/* ── Bouton (token solid.default) ───────────────────────────── */
-.token-button {
-  padding: 0.75rem 1.5rem;                    /* confort de clic */
-  border: 2px solid;                          /* couleur définie inline via style */
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: opacity 0.15s ease;             /* léger feedback au survol */
-}
-
-.token-button:hover {
-  opacity: 0.85;                              /* effet hover discret sans changer les couleurs */
-}
-
-.token-button:active {
-  opacity: 0.7;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 40px;
 }

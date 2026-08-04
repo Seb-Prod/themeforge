@@ -1,15 +1,15 @@
 .root {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+
   background: var(--variant-bg);
   color: var(--variant-text);
   border: 1px solid var(--variant-border);
 
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius-md);
-
   cursor: pointer;
 
   transition:
-    background .2s ease,
-    color .2s ease,
-    border-color .2s ease;
+    background .2s,
+    color .2s,
+    border-color .2s;
 }

@@ -1,10 +1,12 @@
 import { ColorScale } from "@themeforge/shared";
 import type { SemanticVariant, SemanticState } from "./types";
 
+export type SemanticColorValue = keyof ColorScale | "transparent";
+
 export type SemanticRule = {
-  background: keyof ColorScale;
+  background: SemanticColorValue;
   text: keyof ColorScale | "auto";
-  border: keyof ColorScale;
+  border: SemanticColorValue;
 };
 
 export type SemanticVariantRules = {
@@ -78,64 +80,64 @@ export const SEMANTIC_RULES: SemanticVariantRules = {
   },
   outline: {
     default: {
-      background: 50,
-      text: "auto",
+      background: "transparent",
+      text: 500,
       border: 500,
     },
 
     hover: {
       background: 100,
-      text: "auto",
+      text: 500,
       border: 600,
     },
 
     active: {
       background: 200,
-      text: "auto",
+      text: 600,
       border: 700,
     },
 
     focus: {
       background: 100,
-      text: "auto",
+      text: 500,
       border: 600,
     },
 
     disabled: {
-      background: 50,
-      text: "auto",
+      background: "transparent",
+      text: 300,
       border: 200,
     },
   },
   ghost: {
     default: {
-      background: 50,
-      text: "auto",
-      border: 50,
+      background: "transparent",
+      text: 500,
+      border: "transparent",
     },
 
     hover: {
       background: 100,
-      text: "auto",
-      border: 100,
+      text: 500,
+      border: "transparent",
     },
 
     active: {
       background: 200,
-      text: "auto",
-      border: 200,
+      text: 600,
+      border:"transparent",
     },
 
     focus: {
       background: 100,
-      text: "auto",
-      border: 100,
+      text: 500,
+      border: "transparent",
     },
 
     disabled: {
-      background: 50,
-      text: "auto",
-      border: 50,
+      background: "transparent",
+      text: 300,
+      border: "transparent",
     },
   },
   link: {
