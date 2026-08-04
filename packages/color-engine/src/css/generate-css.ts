@@ -21,6 +21,10 @@ export function generateCssVariables(
     variables[`--surface-${toKebabCase(name)}`] = hex;
   });
 
+  Object.entries(scheme.tokens).forEach(([name, hex]) => {
+    variables[`--theme-${toKebabCase(name)}`] = hex;
+  });
+
   return variables;
 }
 

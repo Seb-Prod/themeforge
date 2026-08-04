@@ -97,4 +97,13 @@ describe("css export", () => {
       "--color-primary-ghost-default-background: transparent",
     );
   });
+
+  it("generates theme tokens", () => {
+    const css = exportThemeCss(theme);
+
+    expect(css).toContain("--theme-background");
+    expect(css).toContain("--theme-foreground");
+    expect(css).toContain("--theme-border");
+    expect(css).toContain("--theme-muted");
+  });
 });
