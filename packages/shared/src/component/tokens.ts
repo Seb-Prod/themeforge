@@ -8,22 +8,18 @@
  * - rayon
  */
 export interface ComponentSizeToken {
-  height?: string;
+  height: string;
 
-  paddingX?: string;
+  paddingX: string;
 
-  paddingY?: string;
+  paddingY: string;
 
-  fontSize?: string;
+  fontSize: string;
 
-  radius?: string;
+  radius: string;
 }
-
 
 /**
  * Tokens de taille d'un composant.
  */
-export type ComponentSizeScale = Record<
-  string,
-  ComponentSizeToken
->;
+export type ComponentSizeScale = Record<string, ComponentSizeToken>;
