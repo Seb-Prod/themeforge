@@ -1,19 +1,18 @@
 .root {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+
   background: var(--variant-background);
   color: var(--variant-text);
   border: 1px solid var(--variant-border);
 
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius-md);
-
   cursor: pointer;
 
   transition:
-    background .2s,
-    color .2s,
-    border-color .2s;
+    background .2s ease,
+    color .2s ease,
+    border-color .2s ease;
 }
-
 
 .root:hover {
   background: var(--variant-hover-background);
@@ -21,13 +20,11 @@
   border-color: var(--variant-hover-border);
 }
 
-
 .root:active {
   background: var(--variant-active-background);
   color: var(--variant-active-text);
   border-color: var(--variant-active-border);
 }
-
 
 .root:focus-visible {
   background: var(--variant-focus-background);
@@ -35,9 +32,27 @@
   border-color: var(--variant-focus-border);
 }
 
-
 .root:disabled {
   background: var(--variant-disabled-background);
   color: var(--variant-disabled-text);
   border-color: var(--variant-disabled-border);
+  cursor: not-allowed;
+}
+
+.root[data-size="sm"] {
+  height: 32px;
+  padding-inline: 12px;
+  font-size: 0.875rem;
+}
+
+.root[data-size="md"] {
+  height: 40px;
+  padding-inline: 16px;
+  font-size: 1rem;
+}
+
+.root[data-size="lg"] {
+  height: 48px;
+  padding-inline: 20px;
+  font-size: 1.125rem;
 }

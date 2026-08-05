@@ -3,7 +3,6 @@ import styles from "./page.module.css";
 import { createTheme, exportThemeCss } from "@themeforge/color-engine";
 
 export default function Home() {
-
   const theme = createTheme({
     colors: { primary: "#a865cc" },
   });
@@ -14,11 +13,17 @@ export default function Home() {
       <h1>Themeforge</h1>
 
       <div className={styles.buttons}>
-        <Button>Primary</Button>
+        <Button>Primary solid</Button>
 
-        <Button variant="outline">Outline</Button>
+        <Button variant="soft">Primary soft</Button>
 
-        <Button variant="ghost">Ghost</Button>
+        <Button variant="outline">Primary outline</Button>
+
+        <Button variant="ghost">Primary ghost</Button>
+
+        <Button variant="link">Primary link</Button>
+
+        <Button color="accent">Accent</Button>
       </div>
     </main>
   );
