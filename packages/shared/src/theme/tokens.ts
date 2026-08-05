@@ -1,3 +1,5 @@
+import { ComponentSizeScale } from "../component";
+
 /**
  * Tokens de design indépendants du thème.
  *
@@ -5,24 +7,20 @@
  * directement par les composants.
  */
 export interface DesignTokens {
-  /**
-   * Rayons des bordures.
-   */
-  radius: {
-    [key: string]: string;
+
+  radius: Record<string,string>;
+
+  spacing: Record<string,string>;
+
+  shadows: Record<string,string>;
+
+
+  components: {
+
+    button: {
+      sizes: ComponentSizeScale;
+    };
+
   };
 
-  /**
-   * Échelle d'espacement.
-   */
-  spacing: {
-    [key: string]: string;
-  };
-
-  /**
-   * Ombres.
-   */
-  shadows: {
-    [key: string]: string;
-  };
 }
