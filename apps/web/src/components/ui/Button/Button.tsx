@@ -1,41 +1,60 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 import styles from "./Button.module.css";
-import { FontSize } from "../../../../../../packages/shared/src/typography/typography-token";
+import { Color, Size, Variant } from "@/components/types";
+import clsx from "clsx";
 
-type ButtonSize = "sm" | "md" | "lg";
-type ButtonVariant = "solid" | "soft" | "outline" | "ghost" | "link";
-type ButtonColor = "primary" | "accent";
-type ButtonType = "button" | "submit" | "reset";
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  children?: ReactNode;
+  color?: Color;
+  variant?: Variant;
+  size?: Size;
+  fullWidth?: boolean;
 
-type ButtonProps = {
-  children: ReactNode;
-  color?: ButtonColor;
-  variant?: ButtonVariant;
-  size?: ButtonSize;
+  loading?: boolean;
+  loadingText?: string;
+
   disabled?: boolean;
-  type?: ButtonType;
+  type?: "button" | "submit" | "reset";
+
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
+
+  className?: string;
 };
 
 export function Button({
-  children,
   color = "primary",
   variant = "solid",
-  type = "button",
-  disabled,
   size = "md",
+  fullWidth,
+  leftIcon,
+  rightIcon,
+  className,
+  type = "button",
+  children,
+  loading,
+  loadingText,
+  ...props
 }: ButtonProps) {
+  const iconOnly = !children && (leftIcon || rightIcon);
   return (
     <button
       type={type}
-      disabled={disabled}
-      className={styles.root}
+      className={clsx(styles.root, className)}
       data-color={color}
       data-variant={variant}
       data-size={size}
+      data-icon-only={iconOnly || undefined}
+      data-full-width={fullWidth || undefined}
+      {...props}
     >
-      {children}
+      {leftIcon && <span className={styles.icon}>{leftIcon}</span>}
+
+      {children && <span className={styles.label}>{children}</span>}
+
+      {rightIcon && <span className={styles.icon}>{rightIcon}</span>}
     </button>
   );
 }

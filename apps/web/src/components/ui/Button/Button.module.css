@@ -1,5 +1,25 @@
 .root {
-  padding: 0.5rem 1rem;
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--button-gap);
+
+  flex-shrink: 0;
+
+  appearance: none;
+  user-select: none;
+  white-space: nowrap;
+  text-decoration: none;
+
+  font: inherit;
+  line-height: 1;
+
+  height: var(--button-height);
+  padding: 0 var(--button-padding-x);
+  font-size: var(--button-font-size);
+
   border-radius: var(--radius-md);
 
   background: var(--variant-background);
@@ -9,18 +29,20 @@
   cursor: pointer;
 
   transition:
-    background .2s ease,
+    background-color .2s ease,
     color .2s ease,
-    border-color .2s ease;
+    border-color .2s ease,
+    box-shadow .2s ease,
+    transform .1s ease;
 }
 
-.root:hover {
+.root:hover:not(:disabled) {
   background: var(--variant-hover-background);
   color: var(--variant-hover-text);
   border-color: var(--variant-hover-border);
 }
 
-.root:active {
+.root:active:not(:disabled) {
   background: var(--variant-active-background);
   color: var(--variant-active-text);
   border-color: var(--variant-active-border);
@@ -30,29 +52,62 @@
   background: var(--variant-focus-background);
   color: var(--variant-focus-text);
   border-color: var(--variant-focus-border);
+
+  outline: none;
 }
 
 .root:disabled {
   background: var(--variant-disabled-background);
   color: var(--variant-disabled-text);
   border-color: var(--variant-disabled-border);
+
   cursor: not-allowed;
 }
 
 .root[data-size="sm"] {
-  height: 32px;
-  padding-inline: 12px;
-  font-size: 0.875rem;
+  --button-height: 2rem;
+  --button-padding-x: .75rem;
+  --button-font-size: .875rem;
+  --button-gap: .375rem;
 }
 
 .root[data-size="md"] {
-  height: 40px;
-  padding-inline: 16px;
-  font-size: 1rem;
+  --button-height: 2.5rem;
+  --button-padding-x: 1rem;
+  --button-font-size: .875rem;
+  --button-gap: .5rem;
 }
 
 .root[data-size="lg"] {
-  height: 48px;
-  padding-inline: 20px;
-  font-size: 1.125rem;
+  --button-height: 3rem;
+  --button-padding-x: 1.25rem;
+  --button-font-size: 1rem;
+  --button-gap: .625rem;
+}
+
+.root[data-full-width="true"] {
+  width: 100%;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.icon>svg {
+  width: 1em;
+  height: 1em;
+}
+
+.root[data-icon-only="true"] {
+  padding: 0;
+  width: var(--button-height);
 }
