@@ -1,23 +1,18 @@
 /**
  * Tokens dimensionnels d'un composant.
  *
- * Exemple :
- * - hauteur
+ * Les propriétés sont libres afin de permettre
+ * à chaque composant de définir ses propres tokens.
+ *
+ * Exemples :
+ * - height
  * - padding
- * - taille de police
- * - rayon
+ * - gap
+ * - fontSize
+ * - radius
+ * - iconSize
  */
-export interface ComponentSizeToken {
-  height: string;
-
-  paddingX: string;
-
-  paddingY: string;
-
-  fontSize: string;
-
-  radius: string;
-}
+export type ComponentSizeToken = Record<string, string>;
 
 /**
  * Tokens de taille d'un composant.

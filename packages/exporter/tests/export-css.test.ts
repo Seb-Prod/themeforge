@@ -53,5 +53,11 @@ describe("exportCss", () => {
     expect(css).toContain("--variant-active-background");
     expect(css).toContain("--variant-focus-background");
     expect(css).toContain("--variant-disabled-background");
+
+    expect(css).toContain('[data-component="button"][data-size="sm"]');
+
+    expect(css).toContain("--component-height: 32px");
+
+    expect(css).toContain("--component-padding-x: 12px");
   });
 });
