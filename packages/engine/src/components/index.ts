@@ -1,1 +1,5 @@
-export { buttonSizes } from "./button";
+import { buttonTokens } from "./button";
+
+export const componentTokens = {
+  button: buttonTokens,
+};

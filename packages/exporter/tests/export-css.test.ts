@@ -43,10 +43,25 @@ describe("exportCss", () => {
     expect(css).toContain("--shadow-sm");
 
     // Component tokens
-    expect(css).toContain("--button-md-height");
+    expect(css).toContain("--button-sm-height");
+    expect(css).toContain("--button-md-padding-x");
     expect(css).toContain("--button-lg-padding-x");
 
-    // Component mappings
+    // Component size mappings
+    expect(css).toContain('[data-component="button"][data-size="sm"]');
+    expect(css).toContain("--component-height: 32px");
+    expect(css).toContain("--component-padding-x: 12px");
+    expect(css).toContain("--component-padding-y: 6px");
+    expect(css).toContain("--component-font-size: 14px");
+    expect(css).toContain("--component-radius: 8px");
+
+    expect(css).toContain('[data-component="button"][data-size="md"]');
+    expect(css).toContain("--component-height: 40px");
+
+    expect(css).toContain('[data-component="button"][data-size="lg"]');
+    expect(css).toContain("--component-padding-x: 20px");
+
+    // Variant mappings
     expect(css).toContain('[data-color="primary"][data-variant="solid"]');
     expect(css).toContain("--variant-background");
     expect(css).toContain("--variant-hover-background");
@@ -54,10 +69,6 @@ describe("exportCss", () => {
     expect(css).toContain("--variant-focus-background");
     expect(css).toContain("--variant-disabled-background");
 
-    expect(css).toContain('[data-component="button"][data-size="sm"]');
-
-    expect(css).toContain("--component-height: 32px");
-
-    expect(css).toContain("--component-padding-x: 12px");
+    expect(css).toContain('[data-color="accent"][data-variant="soft"]');
   });
 });

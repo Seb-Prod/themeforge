@@ -7,20 +7,16 @@ import { ComponentSizeScale } from "../component";
  * directement par les composants.
  */
 export interface DesignTokens {
+  radius: Record<string, string>;
 
-  radius: Record<string,string>;
+  spacing: Record<string, string>;
 
-  spacing: Record<string,string>;
+  shadows: Record<string, string>;
 
-  shadows: Record<string,string>;
-
-
-  components: {
-
-    button: {
+  components: Record<
+    string,
+    {
       sizes: ComponentSizeScale;
-    };
-
-  };
-
+    }
+  >;
 }

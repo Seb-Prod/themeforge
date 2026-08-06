@@ -2,27 +2,25 @@ import type { DesignTokens } from "@themeforge/shared";
 import type { CssRule } from "../css";
 
 export function generateComponentSizeRules(tokens: DesignTokens): CssRule[] {
-  const rules: CssRule[] = [];
+  return Object.entries(tokens.components).flatMap(
+    ([component, definition]) => {
+      if (!definition.sizes) return [];
 
-  Object.entries(tokens.components).forEach(([componentName, component]) => {
-    Object.entries(component.sizes).forEach(([size, values]) => {
-      const declarations: Record<string, string> = {};
-
-      Object.entries(values).forEach(([token, value]) => {
-        declarations[`--component-${toKebabCase(token)}`] = value;
-      });
-
-      rules.push({
-        selector: `[data-component="${componentName}"][data-size="${size}"]`,
-
-        declarations,
-      });
-    });
-  });
-
-  return rules;
+      return Object.entries(definition.sizes).map(([size, values]) => ({
+        selector: `[data-component="${component}"][data-size="${size}"]`,
+        declarations: Object.fromEntries(
+          Object.entries(values).map(([key, value]) => [
+            `--component-${toCssVariableName(key)}`,
+            value,
+          ]),
+        ),
+      }));
+    },
+  );
 }
 
-function toKebabCase(value: string): string {
-  return value.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
+function toCssVariableName(value: string) {
+  return value
+    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .toLowerCase();
 }
