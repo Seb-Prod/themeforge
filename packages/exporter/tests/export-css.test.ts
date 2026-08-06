@@ -71,4 +71,12 @@ describe("exportCss", () => {
 
     expect(css).toContain('[data-color="accent"][data-variant="soft"]');
   });
+
+  it("exports valid css custom properties", () => {
+    const css = exportCss(theme, tokens);
+
+    const invalidVariables = css.match(/--[^:]+:[^;]*:[^;]*/g);
+
+    expect(invalidVariables).toBeNull();
+  });
 });
