@@ -1,5 +1,4 @@
 import type { ThemeScheme } from "@themeforge/color-engine";
-import type { CssRule } from "../css";
 
 /**
  * Génère les variables CSS
@@ -7,7 +6,7 @@ import type { CssRule } from "../css";
  */
 export function generateThemeVariables(
   scheme: ThemeScheme,
-): CssRule {
+): Record<string, string> {
 
   const declarations: Record<string, string> = {};
 
@@ -37,10 +36,7 @@ export function generateThemeVariables(
     ] = value;
   });
 
-  return {
-    selector: ":root",
-    declarations,
-  };
+  return declarations;
 }
 
 function toKebabCase(value: string) {

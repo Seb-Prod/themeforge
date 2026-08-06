@@ -1,0 +1,57 @@
+import { describe, expect, it } from "vitest";
+
+import { createTheme } from "@themeforge/color-engine";
+import { createDesignTokens } from "@themeforge/engine";
+
+import { exportCss } from "../src";
+
+describe("exportCss", () => {
+  const theme = createTheme({
+    colors: {
+      primary: "#a865cc",
+      accent: "#ffb703",
+    },
+    surfaces: {
+      background: "#101010",
+    },
+  });
+
+  const tokens = createDesignTokens();
+
+  it("exports a complete css stylesheet", () => {
+    const css = exportCss(theme, tokens);
+
+    // Theme
+    expect(css).toContain(":root");
+    expect(css).toContain('[data-theme="dark"]');
+
+    // Palette
+    expect(css).toContain("--palette-primary-500");
+    expect(css).toContain("--palette-accent-500");
+
+    // Semantic colors
+    expect(css).toContain("--color-primary-solid-default-background");
+    expect(css).toContain("--color-accent-soft-hover-background");
+
+    // Surfaces
+    expect(css).toContain("--surface-background");
+    expect(css).toContain("--surface-surface");
+
+    // Design tokens
+    expect(css).toContain("--radius-md");
+    expect(css).toContain("--spacing-4");
+    expect(css).toContain("--shadow-sm");
+
+    // Component tokens
+    expect(css).toContain("--button-md-height");
+    expect(css).toContain("--button-lg-padding-x");
+
+    // Component mappings
+    expect(css).toContain('[data-color="primary"][data-variant="solid"]');
+    expect(css).toContain("--variant-background");
+    expect(css).toContain("--variant-hover-background");
+    expect(css).toContain("--variant-active-background");
+    expect(css).toContain("--variant-focus-background");
+    expect(css).toContain("--variant-disabled-background");
+  });
+});
