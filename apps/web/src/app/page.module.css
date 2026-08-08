@@ -1,14 +1,106 @@
 .page {
-  min-height: 100vh;
-  padding: 40px;
-  background: var(--surface-background);
-  color: var(--surface-text);
+	min-height: 100vh;
+	max-width: 72rem;
+	margin: 0 auto;
+	padding: clamp(2rem, 5vw, 5rem) 1.5rem;
+	background: var(--surface-background);
+	color: var(--surface-text);
 }
 
+.header {
+	max-width: 42rem;
+	margin-bottom: 2.5rem;
+}
+
+.headerTopline {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.header h1 {
+	margin-bottom: 0.75rem;
+	font-size: clamp(2.25rem, 6vw, 4.5rem);
+	letter-spacing: -0.05em;
+}
+
+.header p:last-child {
+	color: inherit;
+	font-size: 1.125rem;
+	line-height: 1.6;
+	opacity: 0.72;
+}
+
+.kicker {
+	margin-bottom: 0.5rem;
+	color: var(--palette-primary-500);
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.modeToggle {
+	display: inline-flex;
+	padding: 0.25rem;
+	border: 1px solid color-mix(in srgb, var(--surface-text) 18%, transparent);
+	border-radius: 999px;
+	background: var(--surface-surface);
+}
+
+.visuallyHidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.modeButton,
+.modeButtonActive {
+	padding: 0.4rem 0.7rem;
+	border: 0;
+	border-radius: 999px;
+	background: transparent;
+	color: var(--surface-text);
+	cursor: pointer;
+	font: inherit;
+	font-size: 0.8125rem;
+}
+
+.modeButtonActive {
+	background: var(--palette-primary-500);
+	color: var(--color-primary-solid-default-text);
+}
 
 .buttons {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-top: 40px;
+	display: flex;
+	gap: 16px;
+	flex-wrap: wrap;
+	margin-top: 40px;
+}
+
+.preview {
+	display: grid;
+	gap: 1.25rem;
+	margin-top: 1.5rem;
+	padding: 1.5rem;
+	border: 1px solid color-mix(in srgb, var(--surface-text) 18%, transparent);
+	border-radius: var(--radius-md);
+	background: var(--surface-surface);
+}
+
+.preview h2 {
+	font-size: 1.25rem;
+}
+
+.value {
+	color: var(--surface-text);
+	font-family: var(--font-mono);
+	font-size: 0.8125rem;
+	opacity: 0.72;
 }

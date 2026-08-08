@@ -1,0 +1,97 @@
+.editor {
+	display: grid;
+	gap: 2rem;
+	padding: 1.5rem;
+	border: 1px solid color-mix(in srgb, var(--surface-text) 18%, transparent);
+	border-radius: var(--radius-md);
+	background: var(--surface-surface);
+}
+
+.eyebrow {
+	margin-bottom: 0.5rem;
+	color: var(--palette-primary-500);
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.description {
+	max-width: 42rem;
+	margin-top: 0.5rem;
+	color: var(--surface-text);
+	opacity: 0.72;
+}
+
+.fields {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1rem;
+}
+
+.field {
+	padding: 1rem;
+	border: 1px solid color-mix(in srgb, var(--surface-text) 14%, transparent);
+	border-radius: 0.75rem;
+}
+
+.label {
+	display: block;
+	margin-bottom: 0.75rem;
+	font-weight: 650;
+}
+
+.controls {
+	display: flex;
+	gap: 0.75rem;
+}
+
+.colorPicker {
+	width: 2.75rem;
+	height: 2.5rem;
+	padding: 0.2rem;
+	border: 1px solid color-mix(in srgb, var(--surface-text) 25%, transparent);
+	border-radius: 0.5rem;
+	background: transparent;
+	cursor: pointer;
+}
+
+.hexInput {
+	width: 100%;
+	min-width: 0;
+	padding: 0.625rem 0.75rem;
+	border: 1px solid color-mix(in srgb, var(--surface-text) 25%, transparent);
+	border-radius: 0.5rem;
+	outline: none;
+	background: var(--surface-background);
+	color: var(--surface-text);
+	font: inherit;
+	font-family: var(--font-mono);
+	text-transform: uppercase;
+}
+
+.hexInput:focus-visible,
+.colorPicker:focus-visible {
+	border-color: var(--palette-primary-500);
+	box-shadow: 0 0 0 3px
+		color-mix(in srgb, var(--palette-primary-500) 25%, transparent);
+}
+
+.hint {
+	margin-top: 0.75rem;
+	color: var(--surface-text);
+	font-size: 0.8rem;
+	opacity: 0.72;
+}
+
+.hint span {
+	font-family: var(--font-mono);
+	font-weight: 700;
+	opacity: 1;
+}
+
+@media (max-width: 620px) {
+	.fields {
+		grid-template-columns: 1fr;
+	}
+}

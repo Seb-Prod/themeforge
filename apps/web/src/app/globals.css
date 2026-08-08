@@ -1,45 +1,44 @@
 :root {
-  --radius-md: 12px;
+	--radius-md: 12px;
+	--font-sans: Arial, Helvetica, sans-serif;
+	--font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
 html {
-  height: 100%;
+	height: 100%;
 }
 
 html,
 body {
-  max-width: 100vw;
-  min-height: 100%;
-  overflow-x: hidden;
+	max-width: 100vw;
+	min-height: 100%;
+	overflow-x: hidden;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-  background: var(--surface-background);
-  color: inherit;
+	background: var(--surface-background);
+	color: inherit;
 
-  font-family: Arial, Helvetica, sans-serif;
+	font-family: var(--font-sans);
 
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
-
 
 * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
 }
-
 
 button {
-  font: inherit;
+	font: inherit;
 }
 
-
 a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }

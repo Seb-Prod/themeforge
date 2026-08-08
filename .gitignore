@@ -32,3 +32,5 @@ prisma/*.db
 
 # Cache
 .turbo/
+
+.pnpm-store/

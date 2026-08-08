@@ -1,0 +1,60 @@
+import {
+	createTheme,
+	type ThemeDefinition,
+	type ThemeInput,
+	type ThemeMode,
+} from "@themeforge/color-engine";
+import type { DesignTokens, HexColor } from "@themeforge/shared";
+import { create } from "zustand";
+
+import { initialTheme, initialThemeInput } from "./initialTheme";
+import { initialTokens } from "./initialTokens";
+
+type ThemeforgeState = {
+	/** Editable input. The rendered theme is always derived from this value. */
+	themeInput: ThemeInput;
+	theme: ThemeDefinition;
+	tokens: DesignTokens;
+	mode: ThemeMode;
+
+	setTheme(theme: ThemeDefinition): void;
+	setThemeInput(input: ThemeInput): void;
+	setTokens(tokens: DesignTokens): void;
+	setMode(mode: ThemeMode): void;
+	updateColor(name: string, value: HexColor): void;
+};
+
+export const useThemeforgeStore = create<ThemeforgeState>((set) => ({
+	themeInput: initialThemeInput,
+	theme: initialTheme,
+	tokens: initialTokens,
+	mode: "light",
+
+	setTheme: (theme) => set({ theme }),
+
+	setThemeInput: (themeInput) =>
+		set({
+			themeInput,
+			theme: createTheme(themeInput),
+		}),
+
+	setTokens: (tokens) => set({ tokens }),
+
+	setMode: (mode) => set({ mode }),
+
+	updateColor: (name, value) =>
+		set((state) => {
+			const themeInput: ThemeInput = {
+				...state.themeInput,
+				colors: {
+					...state.themeInput.colors,
+					[name]: value,
+				},
+			};
+
+			return {
+				themeInput,
+				theme: createTheme(themeInput),
+			};
+		}),
+}));
