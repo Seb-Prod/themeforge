@@ -79,12 +79,13 @@
 
 .buttons {
 	display: flex;
-	gap: 16px;
 	flex-wrap: wrap;
+	gap: 16px;
 	margin-top: 40px;
 }
 
-.preview {
+.preview,
+.cssOutput {
 	display: grid;
 	gap: 1.25rem;
 	margin-top: 1.5rem;
@@ -94,7 +95,8 @@
 	background: var(--surface-surface);
 }
 
-.preview h2 {
+.preview h2,
+.cssOutput h2 {
 	font-size: 1.25rem;
 }
 
@@ -103,4 +105,19 @@
 	font-family: var(--font-mono);
 	font-size: 0.8125rem;
 	opacity: 0.72;
+}
+
+.cssOutput pre {
+	max-height: 600px;
+	margin: 0;
+	overflow: auto;
+	padding: 1rem;
+	border: 1px solid color-mix(in srgb, var(--surface-text) 12%, transparent);
+	border-radius: var(--radius-sm);
+	background: var(--surface-background);
+	color: var(--surface-text);
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	line-height: 1.5;
+	white-space: pre;
 }
