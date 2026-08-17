@@ -1,9 +1,6 @@
 import type { ThemeScheme } from "../theme";
 import { generateSemanticVariables } from "./generate-semantic-variables";
 
-/**
- * Génère les variables CSS du thème.
- */
 export function generateCssVariables(
   scheme: ThemeScheme,
 ): Record<string, string> {
@@ -21,8 +18,14 @@ export function generateCssVariables(
     variables[`--surface-${toKebabCase(name)}`] = hex;
   });
 
-  Object.entries(scheme.tokens).forEach(([name, hex]) => {
+  const { text, ...themeTokens } = scheme.tokens;
+
+  Object.entries(themeTokens).forEach(([name, hex]) => {
     variables[`--theme-${toKebabCase(name)}`] = hex;
+  });
+
+  Object.entries(text).forEach(([surface, hex]) => {
+    variables[`--theme-text-${toKebabCase(surface)}`] = hex;
   });
 
   return variables;

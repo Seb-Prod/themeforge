@@ -54,6 +54,15 @@ export interface ThemeTokens {
   foreground: HexColor;
   border: HexColor;
   muted: HexColor;
+  text: ThemeTextTokens;
+}
+
+export interface ThemeTextTokens {
+  onBackground: HexColor;
+  onSurface: HexColor;
+  onSurfaceSecondary: HexColor;
+  onSurfaceTertiary: HexColor;
+  onSurfaceElevated: HexColor;
 }
 
 export interface ThemeScheme<T extends string = string> {
