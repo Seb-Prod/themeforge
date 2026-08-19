@@ -11,7 +11,7 @@ export function EditorSection({ title, action, children }: EditorSectionProps) {
   return (
     <section className={styles.root}>
       <div className={styles.header}>
-        <h2>{title}</h2>
+        <h3>{title}</h3>
         {action}
       </div>
 
