@@ -1,0 +1,14 @@
+.root{
+  display: flex;
+  align-items: center;
+}
+
+.circle {
+  /* requis par Image fill */
+  position: relative;
+  border-radius: 50%;
+  /* coupe l'image au cercle */
+  overflow: hidden;
+  /* évite l'écrasement dans un flex parent */
+  flex-shrink: 0;
+}

@@ -1,0 +1,59 @@
+.root {
+	display: inline-grid;
+	width: fit-content;
+	gap: 0.625rem;
+}
+
+.controls {
+	display: inline-grid;
+	grid-template-columns: repeat(2, 1fr);
+    width: fit-content;
+	gap: 0.25rem;
+
+	padding: 0.25rem;
+	border: 1px solid color-mix(
+		in srgb,
+		var(--theme-text-on-surface) 14%,
+		transparent
+	);
+	border-radius: 0.75rem;
+	background: var(--surface-surface-secondary);
+}
+
+.modeButton,
+.modeButtonActive {
+    min-width: 5.25rem;
+	min-height: 2.25rem;
+	padding: 0.5rem 0.875rem;
+	border: 0;
+	border-radius: 0.5rem;
+
+	background: transparent;
+	color: var(--theme-text-on-surface-secondary);
+	cursor: pointer;
+
+	font: inherit;
+	font-size: 0.8125rem;
+	font-weight: 650;
+
+	transition:
+		background-color 160ms ease,
+		color 160ms ease,
+		box-shadow 160ms ease;
+}
+
+.modeButton:hover {
+	color: var(--theme-text-on-surface);
+}
+
+.modeButtonActive {
+	background: var(--surface-surface-elevated);
+	color: var(--theme-text-on-surface);
+	box-shadow: 0 1px 3px rgb(16 24 40 / 12%);
+}
+
+.modeButton:focus-visible,
+.modeButtonActive:focus-visible {
+	outline: 2px solid var(--palette-primary-500);
+	outline-offset: 2px;
+}

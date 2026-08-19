@@ -41,41 +41,7 @@
 	text-transform: uppercase;
 }
 
-.modeToggle {
-	display: inline-flex;
-	padding: 0.25rem;
-	border: 1px solid color-mix(in srgb, var(--surface-text) 18%, transparent);
-	border-radius: 999px;
-	background: var(--surface-surface);
-}
 
-.visuallyHidden {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	white-space: nowrap;
-	border: 0;
-}
-
-.modeButton,
-.modeButtonActive {
-	padding: 0.4rem 0.7rem;
-	border: 0;
-	border-radius: 999px;
-	background: transparent;
-	color: var(--surface-text);
-	cursor: pointer;
-	font: inherit;
-	font-size: 0.8125rem;
-}
-
-.modeButtonActive {
-	background: var(--palette-primary-500);
-	color: var(--color-primary-solid-default-text);
-}
 
 .buttons {
 	display: flex;
