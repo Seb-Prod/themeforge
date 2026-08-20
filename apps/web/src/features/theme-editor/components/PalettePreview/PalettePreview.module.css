@@ -1,0 +1,36 @@
+/* ── Conteneur ───────────────────────────────────────────── */
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.title {
+  text-transform: capitalize;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* ── Rampe de paliers ────────────────────────────────────── */
+.ramp {
+  display: flex;
+  border-radius: 0.5rem;
+  overflow: hidden; /* coins arrondis appliqués à l'ensemble de la rampe */
+}
+
+.step {
+  flex: 1;
+  height: 5rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 0.375rem;
+}
+
+.shadeLabel {
+  font-size: 0.7rem;
+  font-variant-numeric: tabular-nums;
+  mix-blend-mode: difference; /* lisible quelle que soit la couleur de fond */
+  color: white;
+}

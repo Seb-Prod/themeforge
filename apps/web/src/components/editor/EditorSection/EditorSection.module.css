@@ -1,9 +1,38 @@
-.root{}
+.root {
+}
 
-.header{
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 4px;
-    justify-content: space-between;
+/* ── Header ───────────────────────────────────────────────── */
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 4px;
+	padding: 4px;
+}
+
+.header[role="button"] {
+	cursor: pointer;                 /* uniquement quand la section est collapsible */
+}
+
+.headerRight {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+/* ── Chevron (toggle collapse) ───────────────────────────── */
+.chevron {
+	transition: transform 0.15s ease;
+}
+
+.chevronCollapsed {
+	transform: rotate(-90deg);
+}
+
+/* ── Contenu ─────────────────────────────────────────────── */
+.content {
+	display: flex;                   /* requis pour que `gap` ait un effet */
+	flex-direction: column;
+	gap: 14px;
+	padding: 8px;
 }
