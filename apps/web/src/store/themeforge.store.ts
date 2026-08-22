@@ -19,13 +19,16 @@ type ThemeforgeState = {
 
   /** Nom de la couleur actuellement affichée en aperçu dans le panneau central (null = aucun aperçu). */
   previewedColor: string | null;
+  previewedSurface: string | null;
 
   setTheme(theme: ThemeDefinition): void;
   setThemeInput(input: ThemeInput): void;
   setTokens(tokens: DesignTokens): void;
   setMode(mode: ThemeMode): void;
   updateColor(name: string, value: HexColor): void;
+  updateSurface(name: string, value: HexColor): void;
   setPreviewedColor(name: string | null): void;
+  setPreviewedSurface(name: string | null): void;
 };
 
 export const useThemeforgeStore = create<ThemeforgeState>((set) => ({
@@ -34,6 +37,7 @@ export const useThemeforgeStore = create<ThemeforgeState>((set) => ({
   tokens: initialTokens,
   mode: "light",
   previewedColor: null,
+  previewedSurface:null,
 
   setTheme: (theme) => set({ theme }),
 
@@ -63,5 +67,23 @@ export const useThemeforgeStore = create<ThemeforgeState>((set) => ({
       };
     }),
 
+  updateSurface: (name, value) =>
+    set((state) => {
+      const themeInput: ThemeInput = {
+        ...state.themeInput,
+        surfaces: {
+          ...state.themeInput.surfaces,
+          [name]: value,
+        },
+      };
+
+      return {
+        themeInput,
+        theme: createTheme(themeInput),
+      };
+    }),
+
   setPreviewedColor: (name) => set({ previewedColor: name }),
+
+  setPreviewedSurface: (name) => set({ previewedSurface: name }),
 }));

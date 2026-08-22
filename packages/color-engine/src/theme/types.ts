@@ -39,7 +39,7 @@ export interface ThemeInput {
   /**
    * Surfaces personnalisées.
    */
-  surfaces?: Partial<ThemeSurfaces>;
+  surfaces: Record<string, HexColor>;
 }
 
 export interface ThemeDefinition<T extends string = string> {

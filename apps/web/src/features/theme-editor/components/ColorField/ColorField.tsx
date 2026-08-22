@@ -7,11 +7,11 @@ import { useThemeforgeStore } from "@/store";
 import styles from "./ColorField.module.css";
 import { FaCheck, FaRegCopy } from "react-icons/fa";
 import { LiaEyeSolid } from "react-icons/lia";
+import { ThemeInput } from "@themeforge/color-engine";
 
-type ColorFieldProps = {
-  name: string;
-  label: string;
-};
+type ColorFieldProps =
+  | { name: keyof ThemeInput["colors"]; label: string; isSurface?: false }
+  | { name: keyof ThemeInput["surfaces"]; label: string; isSurface?: true };
 
 /** Paliers de la palette générée par le moteur, du plus clair au plus foncé. */
 export const PALETTE_SHADES = [
@@ -40,12 +40,22 @@ function isHexColor(value: string): value is HexColor {
  *   carrés, en lisant les variables CSS `--palette-{name}-{50..950}` injectées par le
  *   moteur de génération (suppose qu'elles sont déjà définies sur un ancêtre au rendu)
  */
-export function ColorField({ name, label }: ColorFieldProps) {
-  const color = useThemeforgeStore((state) => state.themeInput.colors[name]);
+export function ColorField({
+  name,
+  label,
+  isSurface = false,
+}: ColorFieldProps) {
+  const color = useThemeforgeStore((state) =>
+    isSurface ? state.themeInput.surfaces[name] : state.themeInput.colors[name],
+  );
   const updateColor = useThemeforgeStore((state) => state.updateColor);
+  const updateSurface = useThemeforgeStore((state) => state.updateSurface);
   const previewedColor = useThemeforgeStore((state) => state.previewedColor);
   const setPreviewedColor = useThemeforgeStore(
     (state) => state.setPreviewedColor,
+  );
+  const setPreviewedSurface = useThemeforgeStore(
+    (state) => state.setPreviewedSurface,
   );
 
   const [draft, setDraft] = useState<string>(color);
@@ -64,7 +74,11 @@ export function ColorField({ name, label }: ColorFieldProps) {
     setDraft(value);
 
     if (isHexColor(value)) {
-      updateColor(name, value);
+      if (isSurface) {
+        updateSurface(name, value);
+      } else {
+        updateColor(name, value);
+      }
     }
   }
 
@@ -77,7 +91,12 @@ export function ColorField({ name, label }: ColorFieldProps) {
 
   /** Bascule l'aperçu de cette couleur dans le panneau central (toggle marche/arrêt). */
   function togglePreview() {
-    setPreviewedColor(previewing ? null : name);
+    if (!isSurface) {
+      setPreviewedColor(previewing ? null : name);
+    } else {
+      console.log(name)
+      setPreviewedSurface(previewing ? null : name);
+    }
   }
 
   // Classes conditionnelles du champ hex (bordure d'erreur)
@@ -139,16 +158,22 @@ export function ColorField({ name, label }: ColorFieldProps) {
       </div>
 
       {/* ── Aperçu de la palette générée (10 paliers réels, un carré chacun) ── */}
-      <div className={styles.paletteRow}>
-        {PALETTE_SHADES.map((shade) => (
-          <div
-            className={styles.paletteSwatch}
-            key={shade}
-            style={{ backgroundColor: `var(--palette-${name}-${shade})` }}
-            title={`${name}-${shade}`}
-          />
-        ))}
-      </div>
+      {/* Masqué pour les surfaces : pas d'échelle de paliers générée pour elles */}
+      {!isSurface && (
+        <div className={styles.paletteRow}>
+          {PALETTE_SHADES.map((shade) => (
+            <div
+              className={styles.paletteSwatch}
+              key={shade}
+              style={{
+                backgroundColor: `var(--palette-${name}-${shade})`,
+              }}
+              title={`${name}-${shade}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
+
