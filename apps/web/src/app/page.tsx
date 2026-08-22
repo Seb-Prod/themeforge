@@ -32,14 +32,14 @@ export default function Home() {
          
             <PalettePreview colorName={previewedColor} surfaceName={previewedSurface} />
           
-          {/* <section aria-labelledby="css-title">
+          <section aria-labelledby="css-title">
             <div>
               <p>Generated CSS</p>
               <h2 id="css-title">CSS généré</h2>
             </div>
 
             <pre>{css}</pre>
-          </section> */}
+          </section>
         </>
       </Content>
     </AppShell>

@@ -2,12 +2,12 @@
 .root {
   display: flex;
   flex-direction: column;
-  background: var(--surface-canvas);
+  background: var(--surface-background);
   gap: 1rem;
   padding: 1.5rem;
 }
 
 .base{
   padding: 12px;
-  background: var(--surface-base);
+  background: var(--surface-surface);
 }
